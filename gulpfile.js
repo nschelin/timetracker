@@ -40,6 +40,7 @@ gulp.task('ts', function() {
 	var tsResult = tsProject.src()
 							.pipe($.sourcemaps.init())
 							.pipe(tsProject());
+	log(config.dest.path + '/app')
 	return tsResult.js.pipe(gulp.dest(config.dest.path + '/app'));
 });
 

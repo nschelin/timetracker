@@ -5,12 +5,14 @@ import { LocationStrategy, HashLocationStrategy  } from '@angular/common';
 import { AppComponent }  from './app.component';
 // import { SearchComponent } from './search/search';
 // import { ResultsListComponent } from './results/results-list';
-// import { NavigationComponent } from './navigation/navigation';
+import { NavigationComponent } from './components/navigation/nav.component';
 import { HomeComponent } from './components/home/home.component';
+import { ProjectCodeListComponent } from './components/projectcodes/projectcode.list.component';
 // import { AboutComponent } from './views/about/about';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'projectcodes', component: ProjectCodeListComponent }
 ];
 
 @NgModule({
@@ -19,8 +21,9 @@ const routes: Routes = [
                   AppComponent,
                   // SearchComponent,
                   // ResultsListComponent,
-                  // NavigationComponent,
+                  NavigationComponent,
                   HomeComponent,
+                  ProjectCodeListComponent
                   // AboutComponent
                 ],
   providers:[{provide: LocationStrategy, useClass: HashLocationStrategy}],

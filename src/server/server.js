@@ -15,6 +15,8 @@ var appPath = path.resolve(__dirname, './app');
 var nmPath = path.resolve(__dirname, '../node_modules');
 
 const routes = require('./routes');
+const api = require('./api');
+
 
 let app = express();
 
@@ -25,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', routes);
+app.use('/api', api);
 app.use('/js', express.static(jsPath));
 app.use('/app', express.static(appPath));
 app.use('/node_modules', express.static(nmPath));
