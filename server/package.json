@@ -1,0 +1,27 @@
+{
+    "name": "timetracker-server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "private": true,
+    "scripts": {
+        "start": "npx nodemon src/server.js --signal SIGHUP",
+        "lint": "npx eslint src/**/*.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.16.0",
+        "cookie-parser": "^1.4.3",
+        "dotenv": "^7.0.0",
+        "express": "^4.14.1",
+        "mongoose": "^4.8.1",
+        "morgan": "^1.7.0"
+    },
+    "devDependencies": {
+        "@types/node": "^7.0.4",
+        "eslint": "^5.16.0",
+        "nodemon": "^1.18.11"
+    }
+}

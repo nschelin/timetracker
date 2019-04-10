@@ -1,5 +1,4 @@
-'use strict';
-
+require('dotenv').config();
 const express = require('express');
 const http = require('http');
 const path = require('path');
@@ -12,14 +11,12 @@ global.appRoot = __dirname;
 
 var jsPath = path.resolve(__dirname, './js');
 var appPath = path.resolve(__dirname, './app');
-var nmPath = path.resolve(__dirname, '../node_modules');
+// var nmPath = path.resolve(__dirname, '../node_modules');
 
 const routes = require('./routes');
 const api = require('./api');
 
-
 let app = express();
-
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -28,14 +25,13 @@ app.use(cookieParser());
 
 app.use('/', routes);
 app.use('/api', api);
-app.use('/js', express.static(jsPath));
-app.use('/app', express.static(appPath));
-app.use('/node_modules', express.static(nmPath));
+// app.use('/js', express.static(jsPath));
+// app.use('/app', express.static(appPath));
+// app.use('/node_modules', express.static(nmPath));
 
+const PORT = process.env.PORT || 5000;
 
 let server = http.createServer(app);
-server.listen(3000, function() {
-	console.log('listening...');
+server.listen(PORT, function() {
+	console.log('Server started listening...');
 });
-
-
