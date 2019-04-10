@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'test-ng';
+  title = 'Time Tracker';
 }
 
 // import { Component } from '@angular/core';
