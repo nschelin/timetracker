@@ -25,10 +25,18 @@ exports.update = async (req, res) => {
 			returnUpdatedDocs: true,
 			multi: false
 		});
-		console.log(`updatedClient: ${updatedClient}`);
 		res.send(updatedClient);
 	} catch (e) {
-		console.log(e);
 		res.sendStatus(500).send(e);
+	}
+};
+
+exports.delete = async (req, res) => {
+	const id = req.params.id;
+	try {
+		const numRemoved = await db.clients.removeAsync({ _id: id }, {});
+		res.send(numRemoved);
+	} catch (e) {
+		res.sendStatus(400).send('Bad Request');
 	}
 };

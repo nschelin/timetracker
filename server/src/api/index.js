@@ -13,6 +13,7 @@ router.get('/', function(req, res) {
 router.get('/clients', clientsController.list);
 router.post('/client', clientsController.add);
 router.put('/client/:id', clientsController.update);
+router.delete('/client/:id', clientsController.delete);
 
 // // Company
 // router.get('/company', CompanyController.list);

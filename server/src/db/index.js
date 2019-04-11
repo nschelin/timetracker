@@ -1,5 +1,6 @@
 //const { promisify } = require('util');
-// //const { promisify } = require('util');
+
+// Use bluebird to create promises on db function; had issues with util.promisify (may revisit this...)
 const Promise = require('bluebird');
 const DataStore = require('nedb');
 
@@ -13,31 +14,15 @@ DataStore.prototype.updateAsync = Promise.promisify(
 	{ multiArgs: true }
 );
 
-// DataStore.prototype.findAsync = promisify(DataStore.prototype.find);
-// DataStore.prototype.findOneAsync = promisify(DataStore.prototype.findOne);
-// DataStore.prototype.insertAsync = promisify(DataStore.prototype.insert);
-// DataStore.prototype.updateAsync = promisify(
-// 	(query, update, options) =>
-// 		new Promise((resolve, reject) => {
-// 			DataStore.prototype._update(
-// 				query,
-// 				update,
-// 				options,
-// 				(err, numAffected, docs, upsert) => {
-// 					console.log('update callback');
-// 					if (err) {
-// 						return reject(err);
-// 					} else {
-// 						return resolve({ numAffected, docs, upsert });
-// 					}
-// 				}
-// 			);
-// 		})
-// );
+DataStore.prototype.removeAsync = Promise.promisify(
+	DataStore.prototype.remove,
+	{ multiArgs: true }
+);
 
-//DataStore.prototype.updateAsync = promisify(DataStore.prototype.update);
-//const db = new DataStore({ filename: 'timetracker.db', autoload: true })
 const db = {};
-db.clients = new DataStore({ filename: 'clients.db', autoload: true });
+db.clients = new DataStore({
+	filename: `${__dirname}/clients.db`,
+	autoload: true
+});
 
 module.exports = db;
