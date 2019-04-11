@@ -2,7 +2,7 @@
     "name": "timetracker-server",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "",
     "private": true,
     "scripts": {
         "start": "npx nodemon src/server.js --signal SIGHUP",
@@ -17,7 +17,8 @@
         "dotenv": "^7.0.0",
         "express": "^4.14.1",
         "mongoose": "^4.8.1",
-        "morgan": "^1.7.0"
+        "morgan": "^1.7.0",
+        "nedb": "^1.8.0"
     },
     "devDependencies": {
         "@types/node": "^7.0.4",
