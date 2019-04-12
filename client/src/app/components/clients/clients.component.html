@@ -9,10 +9,6 @@
         </div>
       </div>
     </div>
-  <!-- <div class="column">
-    
-    <h2 class="title is-3">Clients</h2>
-  </div> -->
   
   <div class="column">
     <div class="columns is-mobile is-desktop" *ngFor="let client of clients; index as i">
@@ -35,22 +31,20 @@
       </div>
 
       <div *ngIf="i !== editIndex; else noEditBtn" class="column is-6">
-
           <div class="buttons is-pulled-right">
-            <button type="button" class="button is-link" (click)="editClient(i)">Edit</button>
+            <button type="button" class="button is-link" (click)="editClient(i, client)">Edit</button>
             <button type="button" class="button is-danger">Delete</button>
           </div>
-
       </div>
       <ng-template #noEditBtn>
-
           <div class="column is-6">
             <div class="buttons is-pulled-right">
-              <button type="button" class="button is-danger" (click)="editIndex = -1">Cancel</button>
+              <button type="button" class="button is-danger" (click)="cancelItem(client)">Cancel</button>
               <button type="button" class="button is-link" (click)="saveClient(client)">Save</button>
             </div>
           </div>
-        </ng-template>
+      </ng-template>
+
     </div>
   </div>
 </div>
