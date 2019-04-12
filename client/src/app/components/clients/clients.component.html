@@ -1,3 +1,56 @@
-<p>
-  clients works!
-</p>
+<div class="container">
+    <div class="column">
+      <div class="columns is-mobile">
+        <div class="column is-6">
+            <h2 class="title is-3">Clients</h2>
+        </div>
+        <div class="column is-6">
+          <button type="button" class="button is-success is-pulled-right" (click)="addClient()">Add Client</button>
+        </div>
+      </div>
+    </div>
+  <!-- <div class="column">
+    
+    <h2 class="title is-3">Clients</h2>
+  </div> -->
+  
+  <div class="column">
+    <div class="columns is-mobile is-desktop" *ngFor="let client of clients; index as i">
+      <div class="column is-6 is-flex" style="align-items: center;">
+        <div class="field" *ngIf="i === editIndex; else noEdit">
+          <div class="control">
+            <input class="input is-info" 
+                  type="text" 
+                  myAutoFocus
+                  [value]="client.name" 
+                  (input)="client.name = $event.target.value" 
+                  (keyup.enter)="saveClient(client)" />
+          </div>
+        </div>
+        <ng-template #noEdit>
+          <div>
+            {{ client.name }}
+          </div>
+        </ng-template>
+      </div>
+
+      <div *ngIf="i !== editIndex; else noEditBtn" class="column is-6">
+
+          <div class="buttons is-pulled-right">
+            <button type="button" class="button is-link" (click)="editClient(i)">Edit</button>
+            <button type="button" class="button is-danger">Delete</button>
+          </div>
+
+      </div>
+      <ng-template #noEditBtn>
+
+          <div class="column is-6">
+            <div class="buttons is-pulled-right">
+              <button type="button" class="button is-danger" (click)="editIndex = -1">Cancel</button>
+              <button type="button" class="button is-link" (click)="saveClient(client)">Save</button>
+            </div>
+          </div>
+        </ng-template>
+    </div>
+  </div>
+</div>
