@@ -20,14 +20,13 @@ export class ClientsComponent implements OnInit {
 	}
 
 	editClient(index: Number, client) {
-    console.log(client);
     this.editIndex = index;
     this.originalClient = client;
 	}
 
 	saveClient(client) {
 		this.clientService.saveClient(client).subscribe(() => {
-			this.clients.sort((a, b) => a.name > b.name ? 1 : -1), Input, Renderer2;
+			this.clients.sort((a, b) => a.name > b.name ? 1 : -1);
 			this.editIndex = -1;
 		});
 	}

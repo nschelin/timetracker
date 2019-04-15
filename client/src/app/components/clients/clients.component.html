@@ -16,6 +16,7 @@
         <div class="field" *ngIf="i === editIndex; else noEdit">
           <div class="control">
             <input id="clientName" class="input is-info" 
+                  appAutofocus
                   type="text" 
                   [value]="client.name" 
                   (input)="client.name = $event.target.value" 
