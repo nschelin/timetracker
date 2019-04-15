@@ -33,7 +33,7 @@
       <div *ngIf="i !== editIndex; else noEditBtn" class="column is-6">
           <div class="buttons is-pulled-right">
             <button type="button" class="button is-link" (click)="editClient(i, client)">Edit</button>
-            <button type="button" class="button is-danger">Delete</button>
+            <button type="button" class="button is-danger" (click)="deleteClient(i, client)">Delete</button>
           </div>
       </div>
       <ng-template #noEditBtn>

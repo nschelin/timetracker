@@ -18,5 +18,9 @@ export class ClientService {
 			return this.http.post(`/api/client`, client);
 		}
 	}
+
+	public deleteClient(client) {
+		return this.http.delete(`/api/client/${client._id}`);
+	}
 }
 

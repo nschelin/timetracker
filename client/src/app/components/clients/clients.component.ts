@@ -28,7 +28,16 @@ export class ClientsComponent implements OnInit {
 	saveClient(client) {
 		this.clientService.saveClient(client).subscribe(() => {
 			this.editIndex = -1;
+			this.clients.sort((a, b) => a.name > b.name ? 1 : -1);
 		});
+	}
+
+	deleteClient(index, client) {
+		if(confirm('Delete this Client?')) {
+			this.clientService.deleteClient(client).subscribe(() => {
+				this.clients.splice(index, 1);
+			});
+		}
 	}
 
 	cancelItem(index, client) {
@@ -45,6 +54,6 @@ export class ClientsComponent implements OnInit {
 	ngOnInit() {
 		this.clientService
 			.getClients()
-			.subscribe(results => (this.clients = results as any[]));
+			.subscribe(results => (this.clients = results as any[]).sort((a,b) => a.name > b.name ? 1 : -1));
 	}
 }
