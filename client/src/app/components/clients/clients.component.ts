@@ -1,5 +1,5 @@
-import { ClientService } from './client.service';
 import { Component, OnInit } from '@angular/core';
+import { ClientService } from './client.service';
 
 @Component({
 	selector: 'app-clients',
@@ -27,8 +27,8 @@ export class ClientsComponent implements OnInit {
 
 	saveClient(client) {
 		this.clientService.saveClient(client).subscribe(() => {
+			this.clients.sort((a, b) => a.name > b.name ? 1 : -1), Input, Renderer2;
 			this.editIndex = -1;
-			this.clients.sort((a, b) => a.name > b.name ? 1 : -1);
 		});
 	}
 

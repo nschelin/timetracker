@@ -15,9 +15,8 @@
       <div class="column is-6 is-flex" style="align-items: center;">
         <div class="field" *ngIf="i === editIndex; else noEdit">
           <div class="control">
-            <input class="input is-info" 
+            <input id="clientName" class="input is-info" 
                   type="text" 
-                  myAutoFocus
                   [value]="client.name" 
                   (input)="client.name = $event.target.value" 
                   (keyup.enter)="saveClient(client)" />
