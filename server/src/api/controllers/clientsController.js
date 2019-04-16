@@ -1,4 +1,4 @@
-const ClientRepo = require('../../db/clientRepo');
+const { ClientRepo } = require('../../db');
 const db = new ClientRepo();
 
 exports.list = async (req, res) => {
