@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="column">
+    <div class="columns is-mobile">
+      <div class="column is-6">
+        <h2 class="title is-3">Projects</h2>
+      </div>
+      <div class="column is-6">
+        <button type="button" class="button is-success is-pulled-right" (click)="addProject()">Add Project</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="columns is-mobile is-desktop" *ngFor="let project of projects; index as i">
+      <div class="column is-6" style="align-items: center;">
+        <span *ngIf="i === editIndex; else noEdit">
+          <div class="field">
+            <div class="control">
+              <input id="projectName" class="input is-info" 
+                      appAutofocus 
+                      type="text" 
+                      [value]="project.name"
+                      (input)="project.name = $event.target.value" 
+                      (keyup.enter)="saveProject(project)" />
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <div class="select">
+                <select (change)="project.clientId = $event.target.value" [value]="project.clientId">
+                  <option>Select...</option>
+                  <option *ngFor="let client of clients" [value]="client._id">{{ client.name }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </span>
+
+        <ng-template #noEdit>
+          <div>
+            {{ project.name }} - {{ getProjectName(project.clientId) }}
+          </div>
+        </ng-template>
+
+        <div class="date-info" *ngIf="project._id">
+          Created: {{ project.created | date:'MM/dd/yyyy' }} | Modified: {{ project.modified | date:'MM/dd/yyyy'}}
+        </div>
+      </div>
+
+      <div *ngIf="i !== editIndex; else noEditBtn" class="column is-6">
+        <div class="buttons is-pulled-right">
+          <button type="button" class="button is-link" (click)="editProject(i, project)">Edit</button>
+          <button type="button" class="button is-danger" (click)="deleteProject(i, project)">Delete</button>
+        </div>
+      </div>
+      <ng-template #noEditBtn>
+        <div class="column is-6">
+          <div class="buttons is-pulled-right">
+            <button type="button" class="button is-danger" (click)="cancelItem(i, project)">Cancel</button>
+            <button type="button" class="button is-link" (click)="saveProject(project)">Save</button>
+          </div>
+        </div>
+      </ng-template>
+
+    </div>
+  </div>
+</div>

@@ -10,6 +10,7 @@ import { ProjectCodeListComponent } from './components/projectcodes/projectcode.
 import { TimecardsComponent } from './components/timecards/timecards.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
+import { ProjectsComponent } from './components/projects/projects.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { AutofocusDirective } from './directives/autofocus.directive';
     ProjectCodeListComponent,
     TimecardsComponent,
     ClientsComponent,
-    AutofocusDirective
+    AutofocusDirective,
+    ProjectsComponent
   ],
   imports: [
     BrowserModule,

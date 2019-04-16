@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import Client from '../../models/client';
+import { Observable } from 'rxjs';
+
 @Injectable({
 	providedIn: 'root'
 })
 export class ClientService {
 	constructor(private http: HttpClient) {}
 
-	public getClients() {
-		return this.http.get('/api/clients');
+	public getClients(): Observable<Client[]> {
+		return this.http.get<Client[]>('/api/clients');
 	}
 
-	public saveClient(client) {
+	public saveClient(client: Client) {
 		if (client._id) {
 			return this.http.put(`/api/client/${client._id}`, client);
 		} else {
@@ -19,7 +22,7 @@ export class ClientService {
 		}
 	}
 
-	public deleteClient(client) {
+	public deleteClient(client: Client) {
 		return this.http.delete(`/api/client/${client._id}`);
 	}
 }

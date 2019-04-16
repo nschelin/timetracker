@@ -25,4 +25,9 @@ db.clients = new DataStore({
 	autoload: true
 });
 
+db.projects = new DataStore({
+	filename: `${__dirname}/projects.db`,
+	autoload: true
+});
+
 module.exports = db;

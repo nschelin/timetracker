@@ -1,3 +1,4 @@
 const ClientRepo = require('./clientRepo');
+const ProjectRepo = require('./projectRepo');
 
-module.exports = { ClientRepo };
+module.exports = { ClientRepo, ProjectRepo };

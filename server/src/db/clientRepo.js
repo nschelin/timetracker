@@ -8,6 +8,10 @@ class ClientRepo {
 		return await clients.findAsync({});
 	}
 
+	async findById(id) {
+		return await clients.findOneAsync({ _id: id });
+	}
+
 	async findByName(name) {
 		return await clients.findOneAsync({ name });
 	}
@@ -17,6 +21,7 @@ class ClientRepo {
 	}
 
 	async update(id, client) {
+		client.modified = new Date();
 		return await clients.updateAsync({ _id: id }, client, {
 			returnUpdatedDocs: true,
 			multi: false

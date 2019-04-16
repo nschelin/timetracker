@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from './client.service';
+import Client from '../../models/client';
 
 @Component({
 	selector: 'app-clients',
@@ -7,31 +8,32 @@ import { ClientService } from './client.service';
 	styleUrls: ['./clients.component.scss']
 })
 export class ClientsComponent implements OnInit {
-  public originalClient: any;
-	public clients: any[];
+  public originalClient: Client;
+	public clients: Client[];
 	public editIndex: Number = -1;
 
 	constructor(private clientService: ClientService) {}
 
 	addClient() {
-		const newClient = { name: '' };
+		const newClient: Client = { _id: null, name: '', created: new Date(), modified: new Date() };
 		this.clients.unshift(newClient);
 		this.editIndex = 0;
 	}
 
-	editClient(index: Number, client) {
+	editClient(index: number, client: Client) {
     this.editIndex = index;
     this.originalClient = client;
 	}
 
-	saveClient(client) {
-		this.clientService.saveClient(client).subscribe(() => {
+	saveClient(client: Client) {
+		this.clientService.saveClient(client).subscribe((client: Client) => {
+			this.clients[0] = client;
 			this.clients.sort((a, b) => a.name > b.name ? 1 : -1);
 			this.editIndex = -1;
 		});
 	}
 
-	deleteClient(index, client) {
+	deleteClient(index: number, client: Client) {
 		if(confirm('Delete this Client?')) {
 			this.clientService.deleteClient(client).subscribe(() => {
 				this.clients.splice(index, 1);
@@ -39,9 +41,9 @@ export class ClientsComponent implements OnInit {
 		}
 	}
 
-	cancelItem(index, client) {
+	cancelItem(index: number, client: Client) {
     this.editIndex = -1;
-    if(typeof client._id === 'undefined') {
+    if(client._id === null) {
       this.clients.shift();
     }
     else if(this.originalClient !== null) {
@@ -53,6 +55,6 @@ export class ClientsComponent implements OnInit {
 	ngOnInit() {
 		this.clientService
 			.getClients()
-			.subscribe(results => (this.clients = results as any[]).sort((a,b) => a.name > b.name ? 1 : -1));
+			.subscribe((clients: Client[]) => (this.clients = clients).sort((a,b) => a.name > b.name ? 1 : -1));
 	}
 }

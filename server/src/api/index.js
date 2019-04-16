@@ -1,6 +1,7 @@
 'use strict';
 const router = require('express').Router();
 const clientsController = require('./controllers/clientsController');
+const projectsController = require('./controllers/projectsController');
 // const CompanyController = require(	'./controllers/company');
 // const ProjectController = require('./controllers/project');
 // const ProjectCodeController = require('./controllers/projectcode');
@@ -14,6 +15,11 @@ router.get('/clients', clientsController.list);
 router.post('/client', clientsController.add);
 router.put('/client/:id', clientsController.update);
 router.delete('/client/:id', clientsController.delete);
+
+router.get('/projects', projectsController.list);
+router.post('/project', projectsController.add);
+router.put('/project/:id', projectsController.update);
+router.delete('/project/:id', projectsController.delete);
 
 // // Company
 // router.get('/company', CompanyController.list);

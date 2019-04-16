@@ -12,7 +12,7 @@
   
   <div class="column">
     <div class="columns is-mobile is-desktop" *ngFor="let client of clients; index as i">
-      <div class="column is-6 is-flex" style="align-items: center;">
+      <div class="column is-6" style="align-items: center;">
         <div class="field" *ngIf="i === editIndex; else noEdit">
           <div class="control">
             <input id="clientName" class="input is-info" 
@@ -23,11 +23,16 @@
                   (keyup.enter)="saveClient(client)" />
           </div>
         </div>
+        
         <ng-template #noEdit>
           <div>
             {{ client.name }}
           </div>
         </ng-template>
+        
+        <div class="date-info">
+          Created: {{ client.created | date:'MM/dd/yyyy' }} | Modified: {{ client.modified | date:'MM/dd/yyyy'}}
+        </div>
       </div>
 
       <div *ngIf="i !== editIndex; else noEditBtn" class="column is-6">
