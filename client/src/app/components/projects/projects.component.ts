@@ -23,7 +23,7 @@ export class ProjectsComponent implements OnInit {
   constructor(private projectService: ProjectsService, private clientService: ClientService) { }
 
   addProject() {
-    const newProject: Project = { name: '', clientId: '', created: new Date(), modified: new Date() };
+    const newProject: Project = { name: '', projectCode: '', clientId: '', created: new Date(), modified: new Date() };
     this.projects.unshift(newProject);
     this.editIndex = 0;
   }
@@ -33,9 +33,9 @@ export class ProjectsComponent implements OnInit {
     this.originalProject = project;
   }
 
-  saveProject(project: Project) {
+  saveProject(index, project: Project) {
     this.projectService.saveProject(project).subscribe((project: Project) => {
-      this.projects[0] = project;
+      this.projects[index] = project;
       this.projects.sort((a, b) => a.name > b.name ? 1 : -1);
       this.editIndex = -1;
     });
@@ -61,8 +61,10 @@ export class ProjectsComponent implements OnInit {
   }
 
   getProjectName(id: string) {
-    const client = this.clients.find(i => i._id === id);
-    return client !== null ? client.name : '<No Name>';
+    if(id !== undefined) {
+      const client = this.clients.find(i => i._id === id);
+      return client !== null && client !== undefined ? client.name : '<No Name>';
+    }
   }
 
   ngOnInit() {

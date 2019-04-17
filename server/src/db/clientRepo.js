@@ -21,11 +21,11 @@ class ClientRepo {
 	}
 
 	async update(id, client) {
-		client.modified = new Date();
-		return await clients.updateAsync({ _id: id }, client, {
+		const results = await clients.updateAsync({ _id: id }, client, {
 			returnUpdatedDocs: true,
 			multi: false
 		});
+		return results[1];
 	}
 
 	async delete(id) {

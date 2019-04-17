@@ -21,11 +21,11 @@ class ProjectRepo {
 	}
 
 	async update(id, project) {
-		project.modified = new Date();
-		return await projects.updateAsync({ _id: id }, project, {
+		const results = await projects.updateAsync({ _id: id }, project, {
 			returnUpdatedDocs: true,
 			multi: false
 		});
+		return results[1];
 	}
 
 	async delete(id) {

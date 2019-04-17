@@ -20,6 +20,7 @@ exports.add = async (req, res) => {
 exports.update = async (req, res) => {
 	const id = req.params.id;
 	const project = req.body;
+	project.modified = new Date();
 	try {
 		const updatedProject = await db.update(id, project);
 		res.send(updatedProject);

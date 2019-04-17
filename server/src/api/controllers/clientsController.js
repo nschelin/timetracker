@@ -20,6 +20,7 @@ exports.add = async (req, res) => {
 exports.update = async (req, res) => {
 	const id = req.params.id;
 	const client = req.body;
+	client.modified = new Date();
 	try {
 		const updatedClient = await db.update(id, client);
 		res.send(updatedClient);

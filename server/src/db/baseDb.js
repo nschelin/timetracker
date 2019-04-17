@@ -1,6 +1,10 @@
-//const { promisify } = require('util');
+const dbs = ['clients', 'projects'];
 
+const clientDbFile = `${__dirname}/clients.db`;
+const projectsDbFile = `${__dirname}/projects.db`;
+//const { promisify } = require('util');
 // Use bluebird to create promises on db function; had issues with util.promisify (may revisit this...)
+
 const Promise = require('bluebird');
 const DataStore = require('nedb');
 
@@ -20,14 +24,12 @@ DataStore.prototype.removeAsync = Promise.promisify(
 );
 
 const db = {};
-db.clients = new DataStore({
-	filename: `${__dirname}/clients.db`,
-	autoload: true
-});
-
-db.projects = new DataStore({
-	filename: `${__dirname}/projects.db`,
-	autoload: true
+// create collections
+dbs.forEach(dbKey => {
+	db[dbKey] = new DataStore({
+		filename: `${__dirname}/${dbKey}.db`,
+		autoload: true
+	});
 });
 
 module.exports = db;
