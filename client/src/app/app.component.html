@@ -24,8 +24,8 @@
 </nav>
 
 <div class="container">
-    <div class="column">
-        <router-outlet></router-outlet>
+    <div class="column" [@routerTransition]="getState(o)">
+        <router-outlet #o="outlet"></router-outlet>
     </div>
 </div>
 

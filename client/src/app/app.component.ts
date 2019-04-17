@@ -7,7 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Time Tracker';
+
+  getState(outlet) {
+    return outlet.activatedRouteData.state;
+  }
 }
+
 
 // import { Component } from '@angular/core';
 
