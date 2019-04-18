@@ -7,12 +7,3 @@ nav.navbar {
 //     color: #4a4a4a !important;
 // }
 
-a.navbar-item.has-text-light:hover {
-    color: #F5F5FC !important;
-}
-
-@media screen and (max-width: 1087px) {
-    a.navbar-item.has-text-light:hover {
-        color: #4a4a4a !important;
-    }
- }

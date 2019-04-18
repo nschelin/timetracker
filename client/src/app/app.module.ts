@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 
+import { NavigationComponent} from './components/navigation/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { TimecardsComponent } from './components/timecards/timecards.component';
 import { ClientsComponent } from './components/clients/clients.component';
@@ -16,6 +17,7 @@ import { ProjectsComponent } from './components/projects/projects.component';
 @NgModule({
   declarations: [
     AppComponent,
+    NavigationComponent,
     HomeComponent,
     TimecardsComponent,
     ClientsComponent,

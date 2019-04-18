@@ -1,25 +1,24 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Time Tracker</a>
+<nav class="navbar is-dark">
+  <div class="container">
+    <div class="navbar-brand">
+
+      <a class="navbar-item is-size-4 has-text-weight-bold" routerLink="/">
+        Time Tracker
+      </a>
+
+      <a class="navbar-burger" data-target="navbarMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li [ngClass]="{ active: isRoot }"><a [routerLink]="['/']" (click)="setActive('/')">Home</a></li>
-        <li [ngClass]="{ active: isProjectCode }"><a [routerLink]="['/projectcodes']" (click)="setActive('/projectcodes')">Project Codes</a></li>
-        <li><a>Companies</a></li>
-        <li><a>Resources</a></li>
-        <!-- <li><a>Users</a></li> -->
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    <div id="navbarMenu" class="navbar-menu has-background-dark">
+      <div class="navbar-end">
+        <a routerLink="/timecards" class="navbar-item has-text-light">Time Cards</a>
+        <a routerLink="/projects" class="navbar-item has-text-light">Projects</a>
+        <a routerLink="/clients" class="navbar-item has-text-light">Clients</a>
+      </div>
+    </div>
+  </div>
 </nav>
