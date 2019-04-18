@@ -1,9 +1,8 @@
+// collections and keys to create db files used by nedb.
 const dbs = ['clients', 'projects'];
 
-const clientDbFile = `${__dirname}/clients.db`;
-const projectsDbFile = `${__dirname}/projects.db`;
+// Use bluebird to create promises on db functions; had issues with util.promisify (may revisit this...)
 //const { promisify } = require('util');
-// Use bluebird to create promises on db function; had issues with util.promisify (may revisit this...)
 
 const Promise = require('bluebird');
 const DataStore = require('nedb');
@@ -27,7 +26,7 @@ const db = {};
 // create collections
 dbs.forEach(dbKey => {
 	db[dbKey] = new DataStore({
-		filename: `${__dirname}/${dbKey}.db`,
+		filename: `${__dirname}/data/${dbKey}.db`,
 		autoload: true
 	});
 });

@@ -7,3 +7,13 @@ html, body {
     font-size: 0.60rem;
     font-style: italic;
 }
+
+.button {
+    &.is-danger {
+        background-color: #f00 !important;
+    }
+
+    &.is-success {
+        background-color: #079c3b!important;
+    }
+}

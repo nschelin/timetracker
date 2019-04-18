@@ -1,4 +1,4 @@
-const db = require('./baseDb');
+const db = require('../baseDb');
 const projects = db.projects;
 
 class ProjectRepo {

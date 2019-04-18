@@ -34,7 +34,7 @@
           Created: {{ client.created | date:'MM/dd/yyyy' }} | Modified: {{ client.modified | date:'MM/dd/yyyy'}}
         </div>
       </div>
-
+      
       <div *ngIf="i !== editIndex; else noEditBtn" class="column is-6">
           <div class="buttons is-pulled-right">
             <button type="button" class="button is-link" (click)="editClient(i, client)">Edit</button>

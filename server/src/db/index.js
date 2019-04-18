@@ -1,4 +1,4 @@
-const ClientRepo = require('./clientRepo');
-const ProjectRepo = require('./projectRepo');
+const ClientRepo = require('./repositories/clientRepo');
+const ProjectRepo = require('./repositories/projectRepo');
 
 module.exports = { ClientRepo, ProjectRepo };

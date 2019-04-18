@@ -1,4 +1,4 @@
-const db = require('./baseDb');
+const db = require('../baseDb');
 const clients = db.clients;
 
 class ClientRepo {

@@ -7,7 +7,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 
 import { HomeComponent } from './components/home/home.component';
-import { ProjectCodeListComponent } from './components/projectcodes/projectcode.list.component';
 import { TimecardsComponent } from './components/timecards/timecards.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
@@ -18,7 +17,6 @@ import { ProjectsComponent } from './components/projects/projects.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    ProjectCodeListComponent,
     TimecardsComponent,
     ClientsComponent,
     AutofocusDirective,
