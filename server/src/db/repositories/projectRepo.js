@@ -4,8 +4,21 @@ const projects = db.projects;
 class ProjectRepo {
 	constructor() {}
 
-	async list() {
-		return await projects.findAsync({});
+	async list(page = 1, pageSize = 5) {
+		if (page < 1) page = 0;
+
+		return await new Promise((resolve, reject) => {
+			projects
+				.find({})
+				.sort({ name: 1 })
+				.skip((page - 1) * pageSize)
+				.limit(pageSize)
+				.exec((err, projects) => {
+					if (err) reject(err);
+
+					resolve(projects);
+				});
+		});
 	}
 
 	async findById(id) {

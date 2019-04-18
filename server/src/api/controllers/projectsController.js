@@ -2,7 +2,9 @@ const { ProjectRepo, ClientRepo } = require('../../db');
 const db = new ProjectRepo();
 
 exports.list = async (req, res) => {
-	const projects = await db.list();
+	const page = req.query.page || 1;
+	const pageSize = req.query.pageSize || 5;
+	const projects = await db.list(+page, +pageSize);
 	res.send(projects);
 };
 

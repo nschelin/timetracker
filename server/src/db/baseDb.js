@@ -7,7 +7,7 @@ const dbs = ['clients', 'projects'];
 const Promise = require('bluebird');
 const DataStore = require('nedb');
 
-DataStore.prototype.findAsync = Promise.promisify(DataStore.prototype.find);
+// DataStore.prototype.findAsync = Promise.promisify(DataStore.prototype.find);
 DataStore.prototype.findOneAsync = Promise.promisify(
 	DataStore.prototype.findOne
 );
@@ -16,7 +16,6 @@ DataStore.prototype.updateAsync = Promise.promisify(
 	DataStore.prototype.update,
 	{ multiArgs: true }
 );
-
 DataStore.prototype.removeAsync = Promise.promisify(
 	DataStore.prototype.remove,
 	{ multiArgs: true }

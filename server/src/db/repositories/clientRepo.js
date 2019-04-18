@@ -4,8 +4,21 @@ const clients = db.clients;
 class ClientRepo {
 	constructor() {}
 
-	async list() {
-		return await clients.findAsync({});
+	async list(page = 1, pageSize = 5) {
+		if (page < 1) page = 0;
+
+		return await new Promise((resolve, reject) => {
+			clients
+				.find({})
+				.sort({ name: 1 })
+				.skip((page - 1) * pageSize)
+				.limit(pageSize)
+				.exec((err, clients) => {
+					if (err) reject(err);
+
+					resolve(clients);
+				});
+		});
 	}
 
 	async findById(id) {
