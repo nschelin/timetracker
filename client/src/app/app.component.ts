@@ -1,26 +1,11 @@
 import { Component } from '@angular/core';
-
+import { slideAnimation } from '../animations';
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss'],
+	animations: [slideAnimation]
 })
 export class AppComponent {
-  title = 'Time Tracker';
-
-  getState(outlet) {
-    return outlet.activatedRouteData.state;
-  }
+	title = 'Time Tracker';
 }
-
-
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app',
-//   templateUrl: './app/app.component.html' 
-// })
-
-// export class AppComponent {
- 
-// }
