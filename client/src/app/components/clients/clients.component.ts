@@ -15,7 +15,7 @@ export class ClientsComponent implements OnInit {
 	constructor(private clientService: ClientService) {}
 
 	addClient() {
-		const newClient: Client = { _id: null, name: '', created: new Date(), modified: new Date() };
+		const newClient: Client = { name: '', created: new Date(), modified: new Date() };
 		this.clients.unshift(newClient);
 		this.editIndex = 0;
 	}
