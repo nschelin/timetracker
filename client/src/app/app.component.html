@@ -2,7 +2,7 @@
     <div class="container">
         <div class="navbar-brand">
 
-            <a class="navbar-item is-size-4 has-text-weight-bold" href="/">
+            <a class="navbar-item is-size-4 has-text-weight-bold" routerLink="/">
                 Time Tracker
             </a>
 
@@ -25,7 +25,9 @@
 
 <div class="container">
     <div class="column" [@slideAnimation]="o.isActivated ? o.activatedRoute : ''">
-        <router-outlet #o="outlet"></router-outlet>
+        <main>
+            <router-outlet #o="outlet"></router-outlet>
+        </main>
     </div>
 </div>
 
