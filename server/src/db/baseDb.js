@@ -1,5 +1,5 @@
 // collections and keys to create db files used by nedb.
-const dbs = ['clients', 'projects'];
+const dbs = ['clients', 'projects', 'timecards'];
 
 // Use bluebird to create promises on db functions; had issues with util.promisify (may revisit this...)
 //const { promisify } = require('util');
