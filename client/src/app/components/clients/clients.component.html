@@ -1,54 +1,43 @@
 <div class="container">
-    <div class="column">
-      <div class="columns is-mobile">
-        <div class="column is-6">
-            <h2 class="title is-3">Clients</h2>
-        </div>
-        <div class="column is-6">
-          <button type="button" class="button is-success is-pulled-right" (click)="addClient()">Add Client</button>
-        </div>
+  <div class="column">
+    <div class="columns is-mobile">
+      <div class="column is-6">
+          <h2 class="title is-3">Clients</h2>
+      </div>
+      <div class="column is-6">
+        <button type="button" class="button is-success is-pulled-right" (click)="show = !show">Add Client</button>
       </div>
     </div>
-  
+  </div>
+
+  <app-modal  [title]="'Add/Edit Client'" 
+    [show]="show"
+    [okText]="'Save'"
+    [cancelText]="'Cancel'" 
+    (onClosed)="cancelled($event)" 
+    (onOk)="saved($event)">
+    
+    <!-- <app-clients-form></app-clients-form> -->
+
+  </app-modal>
+
   <div class="column">
     <div class="columns is-mobile is-desktop" *ngFor="let client of clients; index as i">
       <div class="column is-6" style="align-items: center;">
-        <div class="field" *ngIf="i === editIndex; else noEdit">
-          <div class="control">
-            <input id="clientName" class="input is-info" 
-                  appAutofocus
-                  type="text" 
-                  [value]="client.name" 
-                  (input)="client.name = $event.target.value" 
-                  (keyup.enter)="saveClient(client)" />
-          </div>
+        <div>
+          {{ client.name }}
         </div>
-        
-        <ng-template #noEdit>
-          <div>
-            {{ client.name }}
-          </div>
-        </ng-template>
-        
         <div class="date-info">
           Created: {{ client.created | date:'MM/dd/yyyy' }} | Modified: {{ client.modified | date:'MM/dd/yyyy'}}
         </div>
       </div>
       
-      <div *ngIf="i !== editIndex; else noEditBtn" class="column is-6">
+      <div class="column is-6">
           <div class="buttons is-pulled-right">
             <button type="button" class="button is-link" (click)="editClient(i, client)">Edit</button>
             <button type="button" class="button is-danger" (click)="deleteClient(i, client)">Delete</button>
           </div>
       </div>
-      <ng-template #noEditBtn>
-          <div class="column is-6">
-            <div class="buttons is-pulled-right">
-              <button type="button" class="button is-danger" (click)="cancelItem(i, client)">Cancel</button>
-              <button type="button" class="button is-link" (click)="saveClient(client)">Save</button>
-            </div>
-          </div>
-      </ng-template>
 
     </div>
   </div>

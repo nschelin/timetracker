@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -12,6 +14,8 @@ import { TimecardsComponent } from './components/timecards/timecards.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { ProjectsComponent } from './components/projects/projects.component';
+import { ClientsFormComponent } from './components/clients-form/clients-form.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 @NgModule({
@@ -22,13 +26,16 @@ import { ProjectsComponent } from './components/projects/projects.component';
     TimecardsComponent,
     ClientsComponent,
     AutofocusDirective,
-    ProjectsComponent
+    ProjectsComponent,
+    ClientsFormComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

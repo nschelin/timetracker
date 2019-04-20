@@ -8,33 +8,47 @@ import Client from '../../models/client';
 	styleUrls: ['./clients.component.scss']
 })
 export class ClientsComponent implements OnInit {
-  public originalClient: Client;
+	public originalClient: Client;
 	public clients: Client[];
 	public editIndex: Number = -1;
+	public show: boolean = false;
 
 	constructor(private clientService: ClientService) {}
 
+	cancelled(cancel) {
+		this.show = cancel;
+	}
+
+	saved(ok) {
+		this.show = false;
+		console.log('save client');
+	}
 	addClient() {
-		const newClient: Client = { name: '', created: new Date(), modified: new Date() };
+		const newClient: Client = {
+			name: '',
+			created: new Date(),
+			modified: new Date()
+		};
+
 		this.clients.unshift(newClient);
 		this.editIndex = 0;
 	}
 
 	editClient(index: number, client: Client) {
-    this.editIndex = index;
-    this.originalClient = client;
+		this.editIndex = index;
+		this.originalClient = client;
 	}
 
-	saveClient(client: Client) {
-		this.clientService.saveClient(client).subscribe((client: Client) => {
-			this.clients[0] = client;
-			this.clients.sort((a, b) => a.name > b.name ? 1 : -1);
-			this.editIndex = -1;
-		});
+	saveClient() {
+		// this.clientService.saveClient(client).subscribe((client: Client) => {
+		// 	this.clients[0] = client;
+		// 	this.clients.sort((a, b) => a.name > b.name ? 1 : -1);
+		// 	this.editIndex = -1;
+		// });
 	}
 
 	deleteClient(index: number, client: Client) {
-		if(confirm('Delete this Client?')) {
+		if (confirm('Delete this Client?')) {
 			this.clientService.deleteClient(client).subscribe(() => {
 				this.clients.splice(index, 1);
 			});
@@ -42,19 +56,20 @@ export class ClientsComponent implements OnInit {
 	}
 
 	cancelItem(index: number, client: Client) {
-    this.editIndex = -1;
-    if(client._id === null) {
-      this.clients.shift();
-    }
-    else if(this.originalClient !== null) {
-      this.clients[index] = this.originalClient;
-      this.originalClient = null;
-    }
-  }
+		this.editIndex = -1;
+		if (client._id === null) {
+			this.clients.shift();
+		} else if (this.originalClient !== null) {
+			this.clients[index] = this.originalClient;
+			this.originalClient = null;
+		}
+	}
 
 	ngOnInit() {
 		this.clientService
 			.getClients()
-			.subscribe((clients: Client[]) => (this.clients = clients).sort((a,b) => a.name > b.name ? 1 : -1));
+			.subscribe((clients: Client[]) =>
+				(this.clients = clients).sort((a, b) => (a.name > b.name ? 1 : -1))
+			);
 	}
 }

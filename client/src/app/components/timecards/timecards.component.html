@@ -1,3 +1,31 @@
-<p>
-  timecards works!
-</p>
+<div class="container">
+  <div class="column">
+    <div class="columns is-mobile">
+      <div class="column is-6">
+        <h2 class="title is-3">
+          Time Cards
+        </h2>
+      </div>
+      <div class="column is-6">
+        <button class="button is-success is-pulled-right" 
+                type="button" 
+                (click)="showAvailableWeeks = !showAvailableWeeks">
+          Add Time Card
+        </button> 
+      </div> 
+    </div>
+  </div>
+
+  <div *ngIf="showAvailableWeeks" class="column is-mobile is-desktop">
+    <div class="field">
+      <label for="timecard" class="label">Timecard Weeks</label>
+      <div class="control">
+          <div class="select">
+            <select id="timecard" name="timecard">
+              <option value="">Select...</option>
+            </select>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
