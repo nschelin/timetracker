@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {
+	FormGroup,
+	FormControl,
+	Validators,
+	FormBuilder
+} from '@angular/forms';
+
 import { ClientService } from './client.service';
 import Client from '../../models/client';
 
@@ -10,6 +17,7 @@ import Client from '../../models/client';
 export class ClientsComponent implements OnInit {
 	public originalClient: Client;
 	public clients: Client[];
+	public client: Client;
 	public editIndex: Number = -1;
 	public show: boolean = false;
 
@@ -21,30 +29,30 @@ export class ClientsComponent implements OnInit {
 
 	saved(ok) {
 		this.show = false;
-		console.log('save client');
 	}
+
 	addClient() {
-		const newClient: Client = {
-			name: '',
-			created: new Date(),
-			modified: new Date()
-		};
-
-		this.clients.unshift(newClient);
-		this.editIndex = 0;
+		this.client = null;
+		this.show = !this.show;
 	}
 
-	editClient(index: number, client: Client) {
-		this.editIndex = index;
-		this.originalClient = client;
+	onClose(client: Client) {
+		if (client != null) {
+			if (client._id) {
+				const index = this.clients.findIndex(cl => cl._id === client._id);
+				this.clients[index] = client;
+			} else {
+				this.clients.push(client);
+			}
+
+			this.clients.sort((a, b) => (a.name > b.name ? 1 : -1));
+		}
+		this.show = false;
 	}
 
-	saveClient() {
-		// this.clientService.saveClient(client).subscribe((client: Client) => {
-		// 	this.clients[0] = client;
-		// 	this.clients.sort((a, b) => a.name > b.name ? 1 : -1);
-		// 	this.editIndex = -1;
-		// });
+	editClient(client: Client) {
+		this.client = client;
+		this.show = true;
 	}
 
 	deleteClient(index: number, client: Client) {
@@ -65,11 +73,15 @@ export class ClientsComponent implements OnInit {
 		}
 	}
 
-	ngOnInit() {
+	getClients() {
 		this.clientService
 			.getClients()
 			.subscribe((clients: Client[]) =>
 				(this.clients = clients).sort((a, b) => (a.name > b.name ? 1 : -1))
 			);
+	}
+
+	ngOnInit() {
+		this.getClients();
 	}
 }

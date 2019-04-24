@@ -12,6 +12,7 @@ exports.add = async (req, res) => {
 	const client = req.body;
 	const foundClient = await db.findByName(client.name);
 	if (!foundClient) {
+		client.created = client.modified = new Date();
 		const newClient = await db.insert(client);
 		res.send(newClient);
 	} else {

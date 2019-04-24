@@ -5,19 +5,15 @@
           <h2 class="title is-3">Clients</h2>
       </div>
       <div class="column is-6">
-        <button type="button" class="button is-success is-pulled-right" (click)="show = !show">Add Client</button>
+        <button type="button" class="button is-success is-pulled-right" (click)="addClient()">Add Client</button>
       </div>
     </div>
   </div>
 
   <app-modal  [title]="'Add/Edit Client'" 
-    [show]="show"
-    [okText]="'Save'"
-    [cancelText]="'Cancel'" 
-    (onClosed)="cancelled($event)" 
-    (onOk)="saved($event)">
+    [show]="show">
     
-    <!-- <app-clients-form></app-clients-form> -->
+    <app-clients-form [client]="client" (onClose)="onClose($event)"></app-clients-form>
 
   </app-modal>
 
@@ -34,7 +30,7 @@
       
       <div class="column is-6">
           <div class="buttons is-pulled-right">
-            <button type="button" class="button is-link" (click)="editClient(i, client)">Edit</button>
+            <button type="button" class="button is-link" (click)="editClient(client)">Edit</button>
             <button type="button" class="button is-danger" (click)="deleteClient(i, client)">Delete</button>
           </div>
       </div>

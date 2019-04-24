@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 
-import { NavigationComponent} from './components/navigation/nav.component';
+import { NavigationComponent } from './components/navigation/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { TimecardsComponent } from './components/timecards/timecards.component';
 import { ClientsComponent } from './components/clients/clients.component';
@@ -17,31 +17,29 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { ClientsFormComponent } from './components/clients-form/clients-form.component';
 import { ModalComponent } from './components/modal/modal.component';
 
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavigationComponent,
-    HomeComponent,
-    TimecardsComponent,
-    ClientsComponent,
-    AutofocusDirective,
-    ProjectsComponent,
-    ClientsFormComponent,
-    ModalComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    ReactiveFormsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		NavigationComponent,
+		HomeComponent,
+		TimecardsComponent,
+		ClientsComponent,
+		AutofocusDirective,
+		ProjectsComponent,
+		ClientsFormComponent,
+		ModalComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		BrowserAnimationsModule,
+		HttpClientModule,
+		ReactiveFormsModule
+	],
+	providers: [],
+	bootstrap: [AppComponent]
 })
-export class AppModule { }
-
+export class AppModule {}
 
 // import { NgModule } from '@angular/core';
 // import { BrowserModule } from '@angular/platform-browser';
@@ -62,7 +60,7 @@ export class AppModule { }
 
 // @NgModule({
 //   imports: [ BrowserModule , RouterModule.forRoot(routes) ],
-//   declarations: [ 
+//   declarations: [
 //                   AppComponent,
 //                   // SearchComponent,
 //                   // ResultsListComponent,

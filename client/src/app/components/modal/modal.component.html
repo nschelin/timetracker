@@ -3,16 +3,16 @@
   <div class="modal-card">
     <header class="modal-card-head">
       <p class="modal-card-title">{{ title }}</p>
-      <button class="delete" aria-label="close" (click)="onClick('cancel')"></button>
+      <!-- <button class="delete" aria-label="close" (click)="onClick('cancel')"></button> -->
     </header>
     <section class="modal-card-body">
       <ng-content></ng-content>
     </section>
-    <footer class="modal-card-foot">
+    <!-- <footer class="modal-card-foot">
       <div class="buttons is-pulled-right">
         <button type="button" class="button is-link" (click)="onClick('ok')">{{ okText }}</button>
         <button type="button" class="button is-danger" (click)="onClick('cancel')">{{ cancelText}}</button>
       </div>
-    </footer>
+    </footer> -->
   </div>
 </div>
