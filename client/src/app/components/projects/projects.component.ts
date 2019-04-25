@@ -68,10 +68,10 @@ export class ProjectsComponent implements OnInit {
   }
 
   ngOnInit() {
-    forkJoin(
-      this.clientService.getClients(),
-      this.projectService.getProjects()
-    ).subscribe(([clientCollection, projects]) => {
+    forkJoin([
+        this.clientService.getClients(),
+        this.projectService.getProjects()
+      ]).subscribe(([clientCollection, projects]) => {
       this.clients = (clientCollection.clients as any[]).sort((a, b) => a.name > b.name ? 1 : -1);
       this.projects = (projects as any[]).sort((a, b) => a.name > b.name ? 1 : -1);
     });
