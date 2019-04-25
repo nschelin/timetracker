@@ -1,3 +1,4 @@
+import { ClientCollection } from './../../models/clientCollection';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -10,8 +11,11 @@ import { Observable } from 'rxjs';
 export class ClientService {
 	constructor(private http: HttpClient) {}
 
-	public getClients(): Observable<Client[]> {
-		return this.http.get<Client[]>('/api/clients');
+	public getClients(page?): Observable<ClientCollection> {
+		if(!page)
+			return this.http.get<ClientCollection>('/api/clients');
+		else
+			return this.http.get<ClientCollection>(`/api/clients?page=${page}`);
 	}
 
 	public saveClient(client: Client) {

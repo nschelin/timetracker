@@ -1,13 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-	FormGroup,
-	FormControl,
-	Validators,
-	FormBuilder
-} from '@angular/forms';
-
 import { ClientService } from './client.service';
 import Client from '../../models/client';
+import { ClientCollection } from 'src/app/models/clientCollection';
 
 @Component({
 	selector: 'app-clients',
@@ -15,20 +9,48 @@ import Client from '../../models/client';
 	styleUrls: ['./clients.component.scss']
 })
 export class ClientsComponent implements OnInit {
+	public pageSize = 5;
 	public originalClient: Client;
 	public clients: Client[];
 	public client: Client;
-	public editIndex: Number = -1;
+	public currentPage: number;
+	public prevBtnDisable: boolean = true;
+	public nextBtnDisable: boolean;
+	public total: number;
 	public show: boolean = false;
 
 	constructor(private clientService: ClientService) {}
 
-	cancelled(cancel) {
+	cancelled(cancel: boolean) {
 		this.show = cancel;
 	}
 
-	saved(ok) {
+	saved() {
 		this.show = false;
+	}
+
+	previous() {
+		if (this.currentPage > 1) {
+			this.currentPage--;
+		} else {
+			this.currentPage = 1;
+		}
+
+		this.prevBtnDisable = this.currentPage === 1 ? true : false;
+		this.nextBtnDisable = this.currentPage * this.pageSize > this.total;
+
+		this.getClients(this.currentPage);
+	}
+
+	next() {
+		if (this.currentPage + 1 * this.pageSize <= this.total) {
+			this.currentPage++;
+		}
+
+		this.prevBtnDisable = this.currentPage === 1 ? true : false;
+		this.nextBtnDisable = this.currentPage * this.pageSize > this.total;
+
+		this.getClients(this.currentPage);
 	}
 
 	addClient() {
@@ -64,7 +86,6 @@ export class ClientsComponent implements OnInit {
 	}
 
 	cancelItem(index: number, client: Client) {
-		this.editIndex = -1;
 		if (client._id === null) {
 			this.clients.shift();
 		} else if (this.originalClient !== null) {
@@ -73,12 +94,16 @@ export class ClientsComponent implements OnInit {
 		}
 	}
 
-	getClients() {
+	getClients(page?: number) {
 		this.clientService
-			.getClients()
-			.subscribe((clients: Client[]) =>
-				(this.clients = clients).sort((a, b) => (a.name > b.name ? 1 : -1))
-			);
+			.getClients(page)
+			.subscribe((clientCollection: ClientCollection) => {
+				this.clients = clientCollection.clients.sort((a, b) =>
+					a.name > b.name ? 1 : -1
+				);
+				this.currentPage = clientCollection.page;
+				this.total = clientCollection.total;
+			});
 	}
 
 	ngOnInit() {

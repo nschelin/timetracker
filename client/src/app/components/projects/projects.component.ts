@@ -7,7 +7,7 @@ import { ProjectsService } from './projects.service';
 import Project from '../../models/project';
 import Client from "../../models/client";
 
-import { v4 as uuid } from 'uuid';
+//import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-projects',
@@ -71,8 +71,8 @@ export class ProjectsComponent implements OnInit {
     forkJoin(
       this.clientService.getClients(),
       this.projectService.getProjects()
-    ).subscribe(([clients, projects]) => {
-      this.clients = (clients as any[]).sort((a, b) => a.name > b.name ? 1 : -1);
+    ).subscribe(([clientCollection, projects]) => {
+      this.clients = (clientCollection.clients as any[]).sort((a, b) => a.name > b.name ? 1 : -1);
       this.projects = (projects as any[]).sort((a, b) => a.name > b.name ? 1 : -1);
     });
   }
