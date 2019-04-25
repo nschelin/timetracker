@@ -25,15 +25,10 @@ export class ClientsFormComponent implements OnInit, OnChanges {
 
 	constructor(private clientService: ClientService, private fb: FormBuilder) {}
 
-	ngOnInit() {
-		this.clientForm = this.fb.group({
-			name: ['', Validators.required]
-		});
-	}
-
+	
 	onSubmit() {
 		this.clientVal.name = this.clientForm.value.name;
-
+		
 		this.clientService.saveClient(this.clientVal).subscribe(
 			(client: Client) => {
 				this.close.emit(client);
@@ -41,18 +36,28 @@ export class ClientsFormComponent implements OnInit, OnChanges {
 				this.clientVal = null;
 			},
 			error => {}
-		);
-	}
+			);
+		}
+		
+		onCancel() {
+			this.close.emit(null);
+			this.clientVal = null;
+			this.clientForm.reset();
+		}
+		
+		ngOnInit() {
+			this.clientForm = this.fb.group({
+				name: ['', Validators.required]
+			});
+		}
 
-	onCancel() {
-		this.close.emit(null);
-		this.clientVal = null;
-		this.clientForm.reset();
-	}
+		get f() {
+			return this.clientForm.controls;
+		}
 
-	ngOnChanges(changes: SimpleChanges) {
-		this.clientVal = changes.client.currentValue;
-		if (this.clientVal && this.clientForm) {
+		ngOnChanges(changes: SimpleChanges) {
+			this.clientVal = changes.client.currentValue;
+			if (this.clientVal && this.clientForm) {
 			this.clientForm.setValue({ name: this.clientVal.name });
 		} else {
 			this.clientVal = {
