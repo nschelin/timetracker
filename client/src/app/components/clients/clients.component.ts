@@ -54,7 +54,12 @@ export class ClientsComponent implements OnInit {
 	}
 
 	addClient() {
-		this.client = null;
+		this.client = {
+			name: '',
+			created: null,
+			modified: null
+		};
+		
 		this.show = !this.show;
 	}
 
