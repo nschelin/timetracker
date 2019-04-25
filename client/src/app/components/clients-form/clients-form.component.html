@@ -9,6 +9,7 @@
             autofocus>
     </div>
     <div *ngIf="f.name.invalid && (f.name.touched || f.name.dirty)" class="has-text-danger">Client Name is Required</div>
+    <div *ngIf="exists" class="has-text-danger">Client Exists</div>
   </div>
   <div class="buttons is-pulled-right">
     <button type="submit" class="button is-link" [disabled]="!clientForm.valid">Save</button>

@@ -16,7 +16,7 @@ exports.add = async (req, res) => {
 		const newClient = await db.insert(client);
 		res.send(newClient);
 	} else {
-		res.sendStatus(400).send('Client Already Exists');
+		res.status(400).send('Client Already Exists');
 	}
 };
 

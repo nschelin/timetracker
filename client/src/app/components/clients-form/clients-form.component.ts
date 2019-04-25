@@ -5,7 +5,7 @@ import {
 	Output,
 	EventEmitter,
 	OnChanges,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -22,42 +22,58 @@ export class ClientsFormComponent implements OnInit, OnChanges {
 	@Output('onClose') close = new EventEmitter<Client>();
 	public clientVal: Client;
 	public clientForm: FormGroup;
+	public exists: boolean = false;
 
 	constructor(private clientService: ClientService, private fb: FormBuilder) {}
 
-	
 	onSubmit() {
 		this.clientVal.name = this.clientForm.value.name;
-		
+
 		this.clientService.saveClient(this.clientVal).subscribe(
 			(client: Client) => {
 				this.close.emit(client);
-				this.clientForm.reset();
 				this.clientVal = null;
+				this.reset();
 			},
-			error => {}
-			);
-		}
-		
-		onCancel() {
-			this.close.emit(null);
-			this.clientVal = null;
-			this.clientForm.reset();
-		}
-		
-		ngOnInit() {
-			this.clientForm = this.fb.group({
-				name: ['', Validators.required]
-			});
-		}
+			error => {
+				if(error.error === 'Client Already Exists') {
+					this.exists = true;
+				}
+				else {
+					this.exists = false;
+				}
+			}
+		);
+	}
 
-		get f() {
-			return this.clientForm.controls;
-		}
+	onCancel() {
+		this.close.emit(null);
+		this.clientVal = null;
+		this.reset();
+	}
 
-		ngOnChanges(changes: SimpleChanges) {
-			this.clientVal = changes.client.currentValue;
-			if (this.clientVal && this.clientForm) {
+	ngOnInit() {
+		this.clientForm = this.fb.group({
+			name: ['', Validators.required]
+		});
+	}
+
+	// get client controls for use in form;
+	get f() {
+		return this.clientForm.controls;
+	}
+
+	// hack
+	reset() {
+		this.clientForm.reset();
+		Object.keys(this.clientForm.controls).forEach(key => {
+			this.clientForm.controls[key].setErrors(null);
+		});
+	}
+
+	ngOnChanges(changes: SimpleChanges) {
+		this.clientVal = changes.client.currentValue;
+		if (this.clientVal && this.clientForm) {
 			this.clientForm.setValue({ name: this.clientVal.name });
 		} else {
 			this.clientVal = {
