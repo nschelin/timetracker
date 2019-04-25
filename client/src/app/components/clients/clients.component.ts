@@ -29,28 +29,12 @@ export class ClientsComponent implements OnInit {
 		this.show = false;
 	}
 
-	previous() {
-		if (this.currentPage > 1) {
-			this.currentPage--;
-		} else {
-			this.currentPage = 1;
-		}
-
-		this.prevBtnDisable = this.currentPage === 1 ? true : false;
-		this.nextBtnDisable = this.currentPage * this.pageSize > this.total;
-
-		this.getClients(this.currentPage);
+	previous(page) {
+		this.getClients(page);
 	}
 
-	next() {
-		if (this.currentPage + 1 * this.pageSize <= this.total) {
-			this.currentPage++;
-		}
-
-		this.prevBtnDisable = this.currentPage === 1 ? true : false;
-		this.nextBtnDisable = this.currentPage * this.pageSize > this.total;
-
-		this.getClients(this.currentPage);
+	next(page) {
+		this.getClients(page);
 	}
 
 	addClient() {
@@ -59,7 +43,7 @@ export class ClientsComponent implements OnInit {
 			created: null,
 			modified: null
 		};
-		
+
 		this.show = !this.show;
 	}
 

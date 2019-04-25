@@ -38,9 +38,12 @@
     </div>
   </div>
   <div class="column">
-    <nav class="pagination">
-      <button type="button" class="pagination-previous" [disabled]="prevBtnDisable" (click)="previous()">Previous</button>
-      <button type="button" class="pagination-next" [disabled]="nextBtnDisable" (click)="next()">Next page</button>
-    </nav>
+      <app-pager [items]="clients" 
+                 [currentPage]="currentPage" 
+                 [total]="total" 
+                 [pageSize]="pageSize"
+                 (onPrev)="previous($event)"
+                 (onNext)="next($event)"
+                 ></app-pager>
   </div>
 </div>

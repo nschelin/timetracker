@@ -16,6 +16,7 @@ import { AutofocusDirective } from './directives/autofocus.directive';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { ClientsFormComponent } from './components/clients-form/clients-form.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { PagerComponent } from './components/pager/pager.component';
 
 @NgModule({
 	declarations: [
@@ -27,7 +28,8 @@ import { ModalComponent } from './components/modal/modal.component';
 		AutofocusDirective,
 		ProjectsComponent,
 		ClientsFormComponent,
-		ModalComponent
+		ModalComponent,
+		PagerComponent
 	],
 	imports: [
 		BrowserModule,
