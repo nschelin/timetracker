@@ -6,7 +6,7 @@ class ClientRepo {
 
 	async list(page = 1, pageSize = 5) {
 		if (page < 1) page = 0;
-
+		const total = await this.total();
 		return await new Promise((resolve, reject) => {
 			clients
 				.find({})
@@ -16,8 +16,23 @@ class ClientRepo {
 				.exec((err, clients) => {
 					if (err) reject(err);
 
-					resolve(clients);
+					const collection = {
+						clients,
+						page,
+						total
+					};
+					resolve(collection);
 				});
+		});
+	}
+
+	async total() {
+		return await new Promise((resolve, reject) => {
+			clients.count({}, function(err, count) {
+				if (err) reject(err);
+
+				resolve(count);
+			});
 		});
 	}
 
