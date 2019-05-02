@@ -1,5 +1,4 @@
-const db = require('../baseDb');
-const clients = db.clients;
+const clients = require('../baseDb').clients;
 
 class ClientRepo {
 	constructor() {}
@@ -57,7 +56,7 @@ class ClientRepo {
 	}
 
 	async delete(id) {
-		return await db.clients.removeAsync({ _id: id }, {});
+		return await clients.removeAsync({ _id: id }, {});
 	}
 }
 
