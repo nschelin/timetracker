@@ -42,7 +42,7 @@ export class ClientsComponent implements OnInit {
 			name: '',
 			created: null,
 			modified: null
-		};
+		} as Client;
 
 		this.show = !this.show;
 	}
@@ -71,15 +71,6 @@ export class ClientsComponent implements OnInit {
 			this.clientService.deleteClient(client).subscribe(() => {
 				this.clients.splice(index, 1);
 			});
-		}
-	}
-
-	cancelItem(index: number, client: Client) {
-		if (client._id === null) {
-			this.clients.shift();
-		} else if (this.originalClient !== null) {
-			this.clients[index] = this.originalClient;
-			this.originalClient = null;
 		}
 	}
 
