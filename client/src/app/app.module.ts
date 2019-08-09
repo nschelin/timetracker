@@ -17,6 +17,7 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { ClientsFormComponent } from './components/clients-form/clients-form.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { PagerComponent } from './components/pager/pager.component';
+import { ProjectFormComponent } from './components/project-form/project-form.component';
 
 @NgModule({
 	declarations: [
@@ -29,7 +30,8 @@ import { PagerComponent } from './components/pager/pager.component';
 		ProjectsComponent,
 		ClientsFormComponent,
 		ModalComponent,
-		PagerComponent
+		PagerComponent,
+		ProjectFormComponent
 	],
 	imports: [
 		BrowserModule,

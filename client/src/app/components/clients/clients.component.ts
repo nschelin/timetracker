@@ -21,13 +21,13 @@ export class ClientsComponent implements OnInit {
 
 	constructor(private clientService: ClientService) {}
 
-	cancelled(cancel: boolean) {
-		this.show = cancel;
-	}
+	// cancelled(cancel: boolean) {
+	// 	this.show = cancel;
+	// }
 
-	saved() {
-		this.show = false;
-	}
+	// saved() {
+	// 	this.show = false;
+	// }
 
 	previous(page) {
 		this.getClients(page);

@@ -16,7 +16,12 @@
 		</div>
 	</div>
 
-	<app-modal [title]="'Add/Edit Project'" [show]="show"> </app-modal>
+	<app-modal [title]="'Add/Edit Project'" [show]="show">
+		<app-project-form
+			[project]="project"
+			(onClose)="onClose($event)"
+		></app-project-form>
+	</app-modal>
 
 	<div class="column content-height">
 		<div class="columns is-mobile header-row">

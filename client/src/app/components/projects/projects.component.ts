@@ -48,37 +48,29 @@ export class ProjectsComponent implements OnInit {
 
 	onClose(project: Project) {
 		if (project !== null) {
-			const index = this.projects.findIndex(p => p._id === p._id);
-			this.projects[index] = project;
-		} else {
-			this.projects.push(project);
+			if (project._id) {
+				const index = this.projects.findIndex(p => p._id === p._id);
+				this.projects[index] = project;
+			} else {
+				this.projects.push(project);
+			}
 		}
 
 		this.show = false;
 	}
 
-	editProject(index: number, project: Project) {
+	editProject(project: Project) {
 		this.project = project;
 		this.show = true;
-		// this.editIndex = index;
-		// this.originalProject = project;
 	}
 
-	saveProject(index, project: Project) {
-		// this.projectService.saveProject(project).subscribe((project: Project) => {
-		// 	this.projects[index] = project;
-		// 	this.projects.sort((a, b) => (a.name > b.name ? 1 : -1));
-		// 	this.editIndex = -1;
-		// });
+	deleteProject(index: number, project: Project) {
+		if (confirm('Delete this Project?')) {
+			this.projectService.deleteProject(project).subscribe(() => {
+				this.projects.splice(index, 1);
+			});
+		}
 	}
-
-	// deleteProject(index: number, project: Project) {
-	// if (confirm('Delete this Project?')) {
-	// 	this.projectService.deleteProject(project).subscribe(() => {
-	// 		this.projects.splice(index, 1);
-	// 	});
-	// }
-	// }
 
 	getProjectName(id: string) {
 		if (id !== undefined) {
