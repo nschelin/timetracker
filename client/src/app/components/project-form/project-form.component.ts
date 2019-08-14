@@ -21,9 +21,11 @@ import Client from 'src/app/models/client';
 })
 export class ProjectFormComponent implements OnInit, OnChanges {
 	@Input() project: Project;
-	@Output('onClose') close = new EventEmitter<Project>();
+	@Output() close = new EventEmitter<Project>();
 	public projectVal: Project;
+	public clients: Client[];
 	public projectForm: FormGroup;
+
 	public exists: boolean = false;
 
 	constructor(
@@ -34,6 +36,8 @@ export class ProjectFormComponent implements OnInit, OnChanges {
 
 	onSubmit() {
 		this.projectVal.name = this.projectForm.value.name;
+		this.projectVal.clientId = this.projectForm.value.clientId;
+		this.projectVal.projectCode = this.projectForm.value.projectCode;
 		this.projectService.saveProject(this.projectVal).subscribe(
 			(project: Project) => {
 				this.close.emit(project);
@@ -67,14 +71,24 @@ export class ProjectFormComponent implements OnInit, OnChanges {
 
 	ngOnInit() {
 		this.projectForm = this.fb.group({
-			name: ['', Validators.required]
+			name: ['', Validators.required],
+			clientId: ['', Validators.required],
+			projectCode: ['', Validators.required]
+		});
+
+		this.clientService.getClients().subscribe(result => {
+			this.clients = result.clients.sort((a, b) => (a.name > b.name ? 1 : -1));
 		});
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
 		this.projectVal = changes.project.currentValue;
 		if (this.projectVal && this.projectForm) {
-			this.projectForm.setValue({ name: this.projectVal.name });
+			this.projectForm.setValue({
+				name: this.projectVal.name,
+				clientId: this.projectVal.clientId,
+				projectCode: this.projectVal.projectCode
+			});
 		} else {
 			this.projectVal = {
 				name: '',

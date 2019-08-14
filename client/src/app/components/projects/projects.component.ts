@@ -47,15 +47,15 @@ export class ProjectsComponent implements OnInit {
 	}
 
 	onClose(project: Project) {
-		if (project !== null) {
-			if (project._id) {
-				const index = this.projects.findIndex(p => p._id === p._id);
+		this.project = project;
+		if (this.project !== null) {
+			const index = this.projects.findIndex(p => p._id === project._id);
+			if (index > -1) {
 				this.projects[index] = project;
 			} else {
 				this.projects.push(project);
 			}
 		}
-
 		this.show = false;
 	}
 
@@ -89,6 +89,7 @@ export class ProjectsComponent implements OnInit {
 			this.clients = (clientCollection.clients as any[]).sort((a, b) =>
 				a.name > b.name ? 1 : -1
 			);
+
 			this.projects = (projects as any[]).sort((a, b) =>
 				a.name > b.name ? 1 : -1
 			);

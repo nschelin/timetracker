@@ -9,7 +9,6 @@
 				formControlName="name"
 				placeholder="Project Name"
 				required
-				autofocus
 			/>
 		</div>
 		<div
@@ -18,6 +17,61 @@
 		>
 			Project Name is Required
 		</div>
+	</div>
+	<div class="field">
+		<div class="control">
+			<label for="projectCode" class="label">Project Code</label>
+			<input
+				name="projectCode"
+				class="input is-info"
+				formControlName="projectCode"
+				placeholder="Project Code"
+				required
+				type="text"
+				class="input"
+			/>
+		</div>
+		<div
+			*ngIf="
+				f.projectCode.invalid && (f.projectCode.touched || f.projectCode.dirty)
+			"
+			class="has-text-danger"
+		>
+			Project Code is Required
+		</div>
+	</div>
+	<div class="field">
+		<div class="control">
+			<label for="client" class="label">Client</label>
+			<div class="select is-info">
+				<select
+					name="client"
+					id="client"
+					formControlName="clientId"
+					class="select"
+				>
+					<option [ngValue]="null">Select...</option>
+					<option *ngFor="let client of clients" [value]="client._id">
+						{{ client.name }}
+					</option>
+				</select>
+			</div>
+		</div>
+		<div
+			*ngIf="f.clientId.invalid && (f.clientId.touched || f.clientId.dirty)"
+			class="has-text-danger"
+		>
+			Client is Required
+		</div>
+	</div>
+
+	<div
+		class="field has-text-black is-size-7"
+		*ngIf="projectVal.created && projectVal.modified"
+	>
+		Created: {{ projectVal.created | date: 'short' }} <br />
+		Modified:
+		{{ projectVal.modified | date: 'short' }}
 	</div>
 	<div class="buttons is-pulled-right">
 		<button
