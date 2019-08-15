@@ -5,7 +5,9 @@ import {
 	Output,
 	EventEmitter,
 	OnChanges,
-	SimpleChanges
+	ViewChild,
+	SimpleChanges,
+	ElementRef
 } from '@angular/core';
 
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -19,10 +21,11 @@ import { ClientService } from '../clients/client.service';
 })
 export class ClientsFormComponent implements OnInit, OnChanges {
 	@Input() client: Client;
-	@Output('onClose') close = new EventEmitter<Client>();
+	@Output() close = new EventEmitter<Client>();
+	@ViewChild('focus', { static: true }) input: ElementRef;
 	public clientVal: Client;
 	public clientForm: FormGroup;
-	public exists: boolean = false;
+	public exists = false;
 
 	constructor(private clientService: ClientService, private fb: FormBuilder) {}
 
@@ -36,17 +39,16 @@ export class ClientsFormComponent implements OnInit, OnChanges {
 				this.reset();
 			},
 			error => {
-				if(error.error === 'Client Already Exists') {
+				if (error.error === 'Client Already Exists') {
 					this.exists = true;
-				}
-				else {
+				} else {
 					this.exists = false;
 				}
 			}
 		);
 	}
 
-	onCancel() {
+	cancel() {
 		this.close.emit(null);
 		this.clientVal = null;
 		this.reset();
@@ -73,6 +75,10 @@ export class ClientsFormComponent implements OnInit, OnChanges {
 
 	ngOnChanges(changes: SimpleChanges) {
 		this.clientVal = changes.client.currentValue;
+
+		// focus
+		setTimeout(() => this.input.nativeElement.focus(), 200);
+
 		if (this.clientVal && this.clientForm) {
 			this.clientForm.setValue({ name: this.clientVal.name });
 		} else {

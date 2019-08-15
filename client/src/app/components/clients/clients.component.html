@@ -18,7 +18,7 @@
 	</div>
 
 	<app-modal [title]="'Add/Edit Client'" [show]="show">
-		<app-clients-form [client]="currentClient" (onClose)="closeModal($event)"></app-clients-form>
+		<app-clients-form [client]="currentClient" (close)="closeModal($event)"></app-clients-form>
 	</app-modal>
 
 	<div class="column is-fullwidth">

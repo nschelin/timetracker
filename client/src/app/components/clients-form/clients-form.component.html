@@ -1,18 +1,24 @@
 <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
-  <div class="field">
-    <div class="control">
-      <label for="clientName" class="label">Client Name</label>
-      <input name="clientName" type="text" class="input is-info" 
-            formControlName="name" 
-            placeholder="Client Name" 
-            required 
-            autofocus>
-    </div>
-    <div *ngIf="f.name.invalid && (f.name.touched || f.name.dirty)" class="has-text-danger">Client Name is Required</div>
-    <div *ngIf="exists" class="has-text-danger">Client Exists</div>
-  </div>
-  <div class="buttons is-pulled-right">
-    <button type="submit" class="button is-link" [disabled]="!clientForm.valid">Save</button>
-    <button type="button" class="button is-danger" (click)="onCancel()">Cancel</button>
-  </div>
+	<div class="field">
+		<div class="control">
+			<label for="clientName" class="label">Client Name</label>
+			<input
+				#focus
+				name="clientName"
+				type="text"
+				class="input is-info"
+				formControlName="name"
+				placeholder="Client Name"
+				required
+			/>
+		</div>
+		<div *ngIf="f.name.invalid && (f.name.touched || f.name.dirty)" class="has-text-danger">
+			Client Name is Required
+		</div>
+		<div *ngIf="exists" class="has-text-danger">Client Exists</div>
+	</div>
+	<div class="buttons is-pulled-right">
+		<button type="submit" class="button is-link" [disabled]="!clientForm.valid">Save</button>
+		<button type="button" class="button is-danger" (click)="cancel()">Cancel</button>
+	</div>
 </form>
