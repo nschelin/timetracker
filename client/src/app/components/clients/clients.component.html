@@ -1,82 +1,74 @@
 <div class="container">
-  <div class="column">
-    <div class="columns is-mobile">
-      <div class="column is-6">
-          <h2 class="title is-3 has-text-white-ter">Clients</h2>
-      </div>
-      <div class="column is-6">
-        <button type="button" title="Add Client" class="button is-success is-pulled-right" (click)="addClient()">
-          <i class="fas fa-plus"></i>
-        </button>
-      </div>
-    </div>
-  </div>
+	<div class="column">
+		<div class="columns is-mobile">
+			<div class="column is-6">
+				<h2 class="title is-3 has-text-white-ter">Clients</h2>
+			</div>
+			<div class="column is-6">
+				<button
+					type="button"
+					title="Add Client"
+					class="button is-success is-pulled-right"
+					(click)="addClient()"
+				>
+					<i class="fas fa-plus"></i>
+				</button>
+			</div>
+		</div>
+	</div>
 
-  <app-modal  [title]="'Add/Edit Client'" 
-    [show]="show">
-    
-    <app-clients-form [client]="client" (onClose)="onClose($event)"></app-clients-form>
+	<app-modal [title]="'Add/Edit Client'" [show]="show">
+		<app-clients-form [client]="currentClient" (onClose)="closeModal($event)"></app-clients-form>
+	</app-modal>
 
-  </app-modal>
+	<div class="column is-fullwidth">
+		<table class="table is-mobile has-background-dark has-text-white">
+			<thead>
+				<tr>
+					<th class="has-text-white">Client</th>
+					<th class="has-text-white">Created</th>
+					<th class="has-text-white">Modified</th>
+					<th class="has-text-white">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let client of clients">
+					<td>{{ client.name }}</td>
+					<td>{{ client.created | date: 'short' }}</td>
+					<td>{{ client.modified | date: 'short' }}</td>
+					<td>
+						<div class="buttons has-addons">
+							<button
+								type="button"
+								class="button is-link"
+								title="Edit Client"
+								(click)="editClient(client)"
+							>
+								<i class="far fa-edit"></i>
+							</button>
+							<button
+								type="button"
+								class="button is-danger"
+								title="Delete Client"
+								(click)="deleteClient(client)"
+							>
+								<i class="far fa-trash-alt"></i>
+							</button>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
-  <div class="column content-height">
-    <div class="columns is-mobile header-row">
-      <div class="column is-3">Client</div>
-      <div class="column is-3">Created</div>
-      <div class="column is-3">Modified</div>
-      <div class="column is-3 align-right">Actions</div>
-    </div>
-    <ng-container *ngFor="let client of clients; index as i">
-      <div class="columns is-mobile">
-        <div class="column is-3">
-          <div>
-            {{ client.name }}
-          </div>
-        </div>
-        <div class="column is-3 date-info">
-          <div>
-            {{ client.created | date:'MM/dd/yyyy' }}
-          </div>
-          <div>
-            {{ client.created | date:'hh:mm:ss a' }}
-          </div>
-        </div>
-        <div class="column is-3 date-info">
-          <div>
-            {{ client.modified | date:'MM/dd/yyyy'}}
-          </div>
-          <div>
-            {{ client.modified | date: 'hh:mm:ss a'}}
-          </div>
-        </div>      
-        <div class="column is-3">
-          <div class="buttons has-addons is-pulled-right is-mobile is-hidden-tablet">
-            <button type="button" class="button is-link is-small" title="Edit Client" (click)="editClient(client)">
-              <i class="far fa-edit"></i>
-            </button>
-            <button type="button" class="button is-danger is-small" title="Delete Client" (click)="deleteClient(i, client)">
-              <i class="far fa-trash-alt"></i>
-            </button>
-          </div>
-          <div class="buttons is-pulled-right is-tablet is-hidden-mobile">
-            <button type="button" class="button is-link" title="Edit Client" (click)="editClient(client)">
-              <i class="far fa-edit"></i>
-            </button>
-            <button type="button" class="button is-danger" title="Delete Client" (click)="deleteClient(i, client)">
-              <i class="far fa-trash-alt"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </ng-container>
-  </div>
-  <div class="column">
-      <app-pager [items]="clients" 
-                 [currentPage]="currentPage" 
-                 [total]="total" 
-                 [pageSize]="pageSize"
-                 (onPrev)="previous($event)"
-                 (onNext)="next($event)"
-                 ></app-pager>
-  </div>
+	<div class="column">
+		<app-pager
+			[items]="clients"
+			[currentPage]="currentPage"
+			[total]="total"
+			[pageSize]="pageSize"
+			(onPrev)="previous($event)"
+			(onNext)="next($event)"
+		></app-pager>
+	</div>
 </div>

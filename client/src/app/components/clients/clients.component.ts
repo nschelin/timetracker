@@ -12,33 +12,17 @@ export class ClientsComponent implements OnInit {
 	public pageSize = 5;
 	public originalClient: Client;
 	public clients: Client[];
-	public client: Client;
+	public currentClient: Client;
 	public currentPage: number;
-	public prevBtnDisable: boolean = true;
+	public prevBtnDisable = true;
 	public nextBtnDisable: boolean;
 	public total: number;
-	public show: boolean = false;
+	public show = false;
 
 	constructor(private clientService: ClientService) {}
 
-	// cancelled(cancel: boolean) {
-	// 	this.show = cancel;
-	// }
-
-	// saved() {
-	// 	this.show = false;
-	// }
-
-	previous(page) {
-		this.getClients(page);
-	}
-
-	next(page) {
-		this.getClients(page);
-	}
-
 	addClient() {
-		this.client = {
+		this.currentClient = {
 			name: '',
 			created: null,
 			modified: null
@@ -47,7 +31,30 @@ export class ClientsComponent implements OnInit {
 		this.show = !this.show;
 	}
 
-	onClose(client: Client) {
+	editClient(client: Client) {
+		this.currentClient = client;
+		this.show = true;
+	}
+
+	deleteClient(client: Client) {
+		if (confirm('Delete this Client?')) {
+			const index = this.clients.findIndex(p => p._id == client._id);
+			this.clientService.deleteClient(client).subscribe(() => {
+				this.clients.splice(index, 1);
+				this.total = this.clients.length;
+			});
+		}
+	}
+
+	getClients(page?: number) {
+		this.clientService.getClients(page).subscribe((clientCollection: ClientCollection) => {
+			this.clients = clientCollection.clients.sort((a, b) => (a.name > b.name ? 1 : -1));
+			this.currentPage = clientCollection.page;
+			this.total = clientCollection.total;
+		});
+	}
+
+	closeModal(client: Client) {
 		if (client != null) {
 			if (client._id) {
 				const index = this.clients.findIndex(cl => cl._id === client._id);
@@ -61,29 +68,12 @@ export class ClientsComponent implements OnInit {
 		this.show = false;
 	}
 
-	editClient(client: Client) {
-		this.client = client;
-		this.show = true;
+	previous(page) {
+		this.getClients(page);
 	}
 
-	deleteClient(index: number, client: Client) {
-		if (confirm('Delete this Client?')) {
-			this.clientService.deleteClient(client).subscribe(() => {
-				this.clients.splice(index, 1);
-			});
-		}
-	}
-
-	getClients(page?: number) {
-		this.clientService
-			.getClients(page)
-			.subscribe((clientCollection: ClientCollection) => {
-				this.clients = clientCollection.clients.sort((a, b) =>
-					a.name > b.name ? 1 : -1
-				);
-				this.currentPage = clientCollection.page;
-				this.total = clientCollection.total;
-			});
+	next(page) {
+		this.getClients(page);
 	}
 
 	ngOnInit() {

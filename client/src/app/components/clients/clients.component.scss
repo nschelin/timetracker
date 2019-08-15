@@ -1,3 +1,23 @@
 .content-height {
-    min-height: 400px;
+	min-height: 400px;
+}
+
+.table {
+	width: 100%;
+}
+
+.table {
+	tr {
+		th:first-child,
+		td:first-child {
+			width: 250px;
+			word-wrap: break-word;
+		}
+
+		th:last-child,
+		td:last-child {
+			min-width: 110px;
+			width: 110px;
+		}
+	}
 }
