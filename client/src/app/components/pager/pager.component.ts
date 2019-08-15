@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
 	selector: 'app-pager',
 	templateUrl: './pager.component.html',
 	styleUrls: ['./pager.component.scss']
 })
-export class PagerComponent implements OnInit {
+export class PagerComponent implements OnInit, OnChanges {
 	@Input() items: any[];
 	@Input() currentPage: number;
 	@Input() total: number;
@@ -32,15 +32,22 @@ export class PagerComponent implements OnInit {
 	}
 
 	_next() {
-		if ((this.currentPage + 1) * this.pageSize <= this.total) {
+		if (this.currentPage * this.pageSize <= this.total) {
 			this.currentPage++;
 		}
 
 		this.isPrevDisabled = this.currentPage === 1 ? true : false;
-		this.isNextDisabled = this.currentPage * this.pageSize >= this.total;
+		this.isNextDisabled = (this.currentPage * this.pageSize) >= this.total;
 
 		this.next.emit(this.currentPage);
 	}
 
-	ngOnInit() {}
+	ngOnInit() {
+	}
+
+	ngOnChanges(changes: SimpleChanges) {
+		if (this.total <= this.pageSize) {
+			this.isNextDisabled = true;
+		}
+	}
 }
