@@ -38,10 +38,8 @@ export class ClientsComponent implements OnInit {
 
 	deleteClient(client: Client) {
 		if (confirm('Delete this Client?')) {
-			const index = this.clients.findIndex(p => p._id == client._id);
 			this.clientService.deleteClient(client).subscribe(() => {
-				this.clients.splice(index, 1);
-				this.total = this.clients.length;
+				this.getClients(this.currentPage);
 			});
 		}
 	}
@@ -62,17 +60,18 @@ export class ClientsComponent implements OnInit {
 			} else {
 				this.clients.push(client);
 			}
-
 			this.clients.sort((a, b) => (a.name > b.name ? 1 : -1));
 		}
 		this.show = false;
 	}
 
 	previous(page) {
+		this.currentPage = page;
 		this.getClients(page);
 	}
 
 	next(page) {
+		this.currentPage = page;
 		this.getClients(page);
 	}
 
