@@ -1,8 +1,20 @@
 <nav class="pagination">
-  <button type="button" class="pagination-previous" [disabled]="isPrevDisabled" title="Previous Item" (click)="previous()">
-    <i class="fas fa-chevron-left"></i>
-  </button>
-  <button type="button" class="pagination-next" [disabled]="isNextDisabled" title="Next Item" (click)="next()">
-    <i class="fas fa-chevron-right"></i>
-  </button>
+	<button
+		type="button"
+		class="pagination-previous"
+		[disabled]="isPrevDisabled"
+		title="Previous Item"
+		(click)="_previous()"
+	>
+		<i class="fas fa-chevron-left"></i>
+	</button>
+	<button
+		type="button"
+		class="pagination-next"
+		[disabled]="isNextDisabled"
+		title="Next Item"
+		(click)="_next()"
+	>
+		<i class="fas fa-chevron-right"></i>
+	</button>
 </nav>

@@ -1,50 +1,46 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-pager',
-  templateUrl: './pager.component.html',
-  styleUrls: ['./pager.component.scss']
+	selector: 'app-pager',
+	templateUrl: './pager.component.html',
+	styleUrls: ['./pager.component.scss']
 })
 export class PagerComponent implements OnInit {
+	@Input() items: any[];
+	@Input() currentPage: number;
+	@Input() total: number;
+	@Input() pageSize: number;
 
-  @Input() items: any[];
-  @Input() currentPage: number;
-  @Input() total: number;
-  @Input() pageSize: number;
+	@Output() next = new EventEmitter<number>();
+	@Output() prev = new EventEmitter<number>();
 
-  @Output() onNext = new EventEmitter<number>();
-  @Output() onPrev = new EventEmitter<number>();
+	public isPrevDisabled = true;
+	public isNextDisabled: boolean;
 
-  public isPrevDisabled: boolean = true;
-  public isNextDisabled: boolean;
+	constructor() {}
 
-  constructor() { }
+	_previous() {
+		if (this.currentPage > 1) {
+			this.currentPage--;
+		} else {
+			this.currentPage = 1;
+		}
 
-  previous() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-    } else {
-      this.currentPage = 1;
-    }
+		this.isPrevDisabled = this.currentPage === 1 ? true : false;
+		this.isNextDisabled = this.currentPage * this.pageSize > this.total;
+		this.prev.emit(this.currentPage);
+	}
 
-    this.isPrevDisabled = this.currentPage === 1 ? true : false;
-    this.isNextDisabled = this.currentPage * this.pageSize > this.total;
-    this.onPrev.emit(this.currentPage);
-  }
+	_next() {
+		if ((this.currentPage + 1) * this.pageSize <= this.total) {
+			this.currentPage++;
+		}
 
-  next() {
+		this.isPrevDisabled = this.currentPage === 1 ? true : false;
+		this.isNextDisabled = this.currentPage * this.pageSize >= this.total;
 
-    if (this.currentPage + 1 * this.pageSize <= this.total) {
-      this.currentPage++;
-    }
+		this.next.emit(this.currentPage);
+	}
 
-    this.isPrevDisabled = this.currentPage === 1 ? true : false;
-    this.isNextDisabled = this.currentPage * this.pageSize > this.total;
-
-    this.onNext.emit(this.currentPage);
-  }
-
-  ngOnInit() {
-  }
-
+	ngOnInit() {}
 }
