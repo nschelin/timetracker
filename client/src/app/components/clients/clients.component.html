@@ -28,33 +28,32 @@
 					<th class="has-text-white">Client</th>
 					<th class="has-text-white">Created</th>
 					<th class="has-text-white">Modified</th>
-					<th class="has-text-white">Actions</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr *ngFor="let client of clients">
-					<td>{{ client.name }}</td>
+					<td>
+						<button
+							type="button"
+							class="button is-dark has-text-weight-bold"
+							title="Edit Client"
+							(click)="editClient(client)"
+						>
+							{{ client.name }}
+						</button>
+					</td>
 					<td>{{ client.created | date: 'short' }}</td>
 					<td>{{ client.modified | date: 'short' }}</td>
 					<td>
-						<div class="buttons has-addons">
-							<button
-								type="button"
-								class="button is-link"
-								title="Edit Client"
-								(click)="editClient(client)"
-							>
-								<i class="far fa-edit"></i>
-							</button>
-							<button
-								type="button"
-								class="button is-danger"
-								title="Delete Client"
-								(click)="deleteClient(client)"
-							>
-								<i class="far fa-trash-alt"></i>
-							</button>
-						</div>
+						<button
+							type="button"
+							class="button is-danger"
+							title="Delete Client"
+							(click)="deleteClient(client)"
+						>
+							<i class="far fa-trash-alt"></i>
+						</button>
 					</td>
 				</tr>
 			</tbody>
