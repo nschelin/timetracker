@@ -16,7 +16,7 @@ class ClientRepo {
 					if (err) reject(err);
 
 					const collection = {
-						clients,
+						items: clients,
 						page,
 						total
 					};

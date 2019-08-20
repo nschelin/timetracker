@@ -77,7 +77,7 @@ export class ProjectFormComponent implements OnInit, OnChanges {
 		});
 
 		this.clientService.getClients().subscribe(result => {
-			this.clients = result.clients.sort((a, b) => (a.name > b.name ? 1 : -1));
+			this.clients = result.items.sort((a, b) => (a.name > b.name ? 1 : -1));
 		});
 	}
 

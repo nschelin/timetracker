@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import Project from '../../models/project';
+import { Collection } from '../../models/collection';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,8 +11,12 @@ import { Observable } from 'rxjs';
 export class ProjectsService {
 	constructor(private http: HttpClient) {}
 
-	public getProjects(): Observable<Project[]> {
-		return this.http.get<Project[]>('/api/projects');
+	public getProjects(page?): Observable<Collection> {
+		if (!page) {
+			return this.http.get<Collection>('/api/projects');
+		} else {
+			return this.http.get<Collection>(`/api/projects?page=${page}`);
+		}
 	}
 
 	public saveProject(project: Project) {

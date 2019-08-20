@@ -4,6 +4,7 @@ import { forkJoin } from 'rxjs';
 import { ClientService } from './../clients/client.service';
 import { ProjectsService } from './projects.service';
 
+import { Collection } from '../../models/collection';
 import Project from '../../models/project';
 import Client from '../../models/client';
 
@@ -18,14 +19,15 @@ export class ProjectsComponent implements OnInit {
 	public originalProject: Project;
 	public clients: Client[];
 	public projects: Project[];
-	public project: Project;
-	public editIndex: Number = -1;
-	public show: boolean = false;
+	public currentProject: Project;
+	public editIndex: -1;
+	public show = false;
+	public currentPage: number;
+	public prevBtnDisable = true;
+	public nextBtnDisable: boolean;
+	public total: number;
 
-	constructor(
-		private projectService: ProjectsService,
-		private clientService: ClientService
-	) {}
+	constructor(private projectService: ProjectsService, private clientService: ClientService) {}
 
 	cancelled(cancel: boolean) {
 		this.show = cancel;
@@ -36,7 +38,7 @@ export class ProjectsComponent implements OnInit {
 	}
 
 	addProject() {
-		this.project = {
+		this.currentProject = {
 			name: '',
 			projectCode: '',
 			clientId: '',
@@ -47,27 +49,37 @@ export class ProjectsComponent implements OnInit {
 	}
 
 	onClose(project: Project) {
-		this.project = project;
-		if (this.project !== null) {
-			const index = this.projects.findIndex(p => p._id === project._id);
-			if (index > -1) {
+		if (project != null) {
+			if (project._id) {
+				const index = this.projects.findIndex(cl => cl._id === project._id);
 				this.projects[index] = project;
 			} else {
 				this.projects.push(project);
 			}
+			this.projects.sort((a, b) => (a.name > b.name ? 1 : -1));
 		}
+
+		// this.currentProject = project;
+		// if (this.currentProject !== null) {
+		// 	const index = this.projects.findIndex(p => p._id === project._id);
+		// 	if (index > -1) {
+		// 		this.projects[index] = project;
+		// 	} else {
+		// 		this.projects.push(project);
+		// 	}
+		// }
 		this.show = false;
 	}
 
 	editProject(project: Project) {
-		this.project = project;
+		this.currentProject = project;
 		this.show = true;
 	}
 
-	deleteProject(index: number, project: Project) {
+	deleteProject(project: Project) {
 		if (confirm('Delete this Project?')) {
 			this.projectService.deleteProject(project).subscribe(() => {
-				this.projects.splice(index, 1);
+				this.projectService.getProjects(this.currentPage);
 			});
 		}
 	}
@@ -75,24 +87,41 @@ export class ProjectsComponent implements OnInit {
 	getProjectName(id: string) {
 		if (id !== undefined) {
 			const client = this.clients.find(i => i._id === id);
-			return client !== null && client !== undefined
-				? client.name
-				: '<No Name>';
+			return client !== null && client !== undefined ? client.name : '<No Name>';
 		}
 	}
 
-	ngOnInit() {
-		forkJoin([
-			this.clientService.getClients(),
-			this.projectService.getProjects()
-		]).subscribe(([clientCollection, projects]) => {
-			this.clients = (clientCollection.clients as any[]).sort((a, b) =>
-				a.name > b.name ? 1 : -1
-			);
+	previous(page) {
+		this.currentPage = page;
+		this.getProjects(page);
+	}
 
-			this.projects = (projects as any[]).sort((a, b) =>
-				a.name > b.name ? 1 : -1
-			);
+	next(page) {
+		this.currentPage = page;
+		this.getProjects(page);
+	}
+
+	getProjects(page?: number) {
+		this.projectService.getProjects(page).subscribe((projectCollection: Collection) => {
+			this.projects = projectCollection.items.sort((a, b) => (a.name > b.name ? 1 : -1));
+			this.currentPage = projectCollection.page;
+			this.total = projectCollection.total;
 		});
+	}
+
+	ngOnInit() {
+		this.getProjects();
+		// forkJoin([
+		// 	this.clientService.getClients(),
+		// 	this.projectService.getProjects()
+		// ]).subscribe(([clientCollection, projects]) => {
+		// 	this.clients = (clientCollection.clients as any[]).sort((a, b) =>
+		// 		a.name > b.name ? 1 : -1
+		// 	);
+
+		// 	this.projects = (projects as any[]).sort((a, b) =>
+		// 		a.name > b.name ? 1 : -1
+		// 	);
+		// });
 	}
 }

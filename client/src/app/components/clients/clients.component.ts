@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from './client.service';
 import Client from '../../models/client';
-import { ClientCollection } from 'src/app/models/clientCollection';
+import { Collection } from 'src/app/models/collection';
 
 @Component({
 	selector: 'app-clients',
@@ -45,8 +45,8 @@ export class ClientsComponent implements OnInit {
 	}
 
 	getClients(page?: number) {
-		this.clientService.getClients(page).subscribe((clientCollection: ClientCollection) => {
-			this.clients = clientCollection.clients.sort((a, b) => (a.name > b.name ? 1 : -1));
+		this.clientService.getClients(page).subscribe((clientCollection: Collection) => {
+			this.clients = clientCollection.items.sort((a, b) => (a.name > b.name ? 1 : -1));
 			this.currentPage = clientCollection.page;
 			this.total = clientCollection.total;
 		});

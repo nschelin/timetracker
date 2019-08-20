@@ -1,11 +1,13 @@
 const db = require('../baseDb');
 const projects = db.projects;
+const clients = db.clients;
 
 class ProjectRepo {
 	constructor() {}
 
 	async list(page = 1, pageSize = 5) {
 		if (page < 1) page = 0;
+		const total = await this.total();
 
 		return await new Promise((resolve, reject) => {
 			projects
@@ -16,8 +18,24 @@ class ProjectRepo {
 				.exec((err, projects) => {
 					if (err) reject(err);
 
-					resolve(projects);
+					const collection = {
+						items: projects,
+						page,
+						total
+					};
+
+					resolve(collection);
 				});
+		});
+	}
+
+	async total() {
+		return await new Promise((resolve, reject) => {
+			projects.count({}, function(err, count) {
+				if (err) reject(err);
+
+				resolve(count);
+			});
 		});
 	}
 
