@@ -5,25 +5,50 @@
 				<h2 class="title is-3 has-text-white-ter">Projects</h2>
 			</div>
 			<div class="column is-6">
-				<button
-					type="button"
-					class="button is-success is-pulled-right"
-					(click)="addProject()"
-				>
+				<button type="button" class="button is-success is-pulled-right" (click)="addProject()">
 					<i class="fas fa-plus"></i>
 				</button>
 			</div>
 		</div>
 	</div>
 
-	<app-modal [title]="'Add/Edit Project'" [show]="show">
+	<!-- <app-modal [title]="'Add/Edit Project'" [show]="show">
 		<app-project-form
 			[project]="project"
 			(close)="onClose($event)"
 		></app-project-form>
-	</app-modal>
+	</app-modal> -->
 
-	<div class="column content-height">
+	<div class="column is-fullwidth">
+		<table class="table is-mobile has-background-dark has-text-white">
+			<thead>
+				<tr>
+					<th class="has-text-white">Project</th>
+					<th class="has-text-white">Created</th>
+					<th class="has-text-white">Modified</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let project of projects">
+					<td>
+						<button type="button" class="button is-dark has-text-weight-bold" title="Edit Project">
+							{{ project.name }}
+						</button>
+					</td>
+					<td>{{ project.created | date: 'short' }}</td>
+					<td>{{ project.modified | date: 'short' }}</td>
+					<td>
+						<button type="button" class="button is-danger" title="Delete Project">
+							<i class="far fa-trash-alt"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- <div class="column content-height">
 		<div class="columns is-mobile header-row">
 			<div class="column is-3">Project Name</div>
 			<div class="column is-3">Created</div>
@@ -42,9 +67,7 @@
 					{{ project.modified | date: 'MM/dd/yyyy' }}
 				</div>
 				<div class="column">
-					<div
-						class="buttons has-addons is-pulled-right is-mobile is-hidden-tablet"
-					>
+					<div class="buttons has-addons is-pulled-right is-mobile is-hidden-tablet">
 						<button
 							type="button"
 							class="button is-link is-small"
@@ -83,7 +106,7 @@
 				</div>
 			</div>
 		</ng-container>
-	</div>
+	</div> -->
 	<!-- <div class="column">
     <div class="columns is-mobile is-desktop" *ngFor="let project of projects; index as i">
       <div class="column is-6" style="align-items: center;">
