@@ -94,6 +94,7 @@ export class ProjectFormComponent implements OnInit, OnChanges {
 				name: '',
 				clientId: null,
 				projectCode: null,
+				client: null,
 				created: null,
 				modified: null
 			};
