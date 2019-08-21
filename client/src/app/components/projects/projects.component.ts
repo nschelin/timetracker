@@ -42,6 +42,7 @@ export class ProjectsComponent implements OnInit {
 			name: '',
 			projectCode: '',
 			clientId: '',
+			client: null,
 			created: new Date(),
 			modified: new Date()
 		} as Project;
@@ -59,15 +60,6 @@ export class ProjectsComponent implements OnInit {
 			this.projects.sort((a, b) => (a.name > b.name ? 1 : -1));
 		}
 
-		// this.currentProject = project;
-		// if (this.currentProject !== null) {
-		// 	const index = this.projects.findIndex(p => p._id === project._id);
-		// 	if (index > -1) {
-		// 		this.projects[index] = project;
-		// 	} else {
-		// 		this.projects.push(project);
-		// 	}
-		// }
 		this.show = false;
 	}
 
@@ -81,13 +73,6 @@ export class ProjectsComponent implements OnInit {
 			this.projectService.deleteProject(project).subscribe(() => {
 				this.projectService.getProjects(this.currentPage);
 			});
-		}
-	}
-
-	getProjectName(id: string) {
-		if (id !== undefined) {
-			const client = this.clients.find(i => i._id === id);
-			return client !== null && client !== undefined ? client.name : '<No Name>';
 		}
 	}
 

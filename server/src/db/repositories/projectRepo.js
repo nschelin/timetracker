@@ -15,16 +15,29 @@ class ProjectRepo {
 				.sort({ name: 1 })
 				.skip((page - 1) * pageSize)
 				.limit(pageSize)
-				.exec((err, projects) => {
+				.exec((err, projectDocs) => {
 					if (err) reject(err);
 
-					const collection = {
-						items: projects,
-						page,
-						total
-					};
+					const clientIds = projectDocs.map(({ clientId }) => ({
+						_id: clientId
+					}));
 
-					resolve(collection);
+					clients.find({ $or: clientIds }, (err, clientDocs) => {
+						if (err) reject(err);
+
+						projectDocs.forEach((p, index, arr) => {
+							const client = clientDocs.find(c => c._id === p.clientId);
+							arr[index].client = client;
+						});
+
+						const collection = {
+							items: projectDocs,
+							page,
+							total
+						};
+
+						resolve(collection);
+					});
 				});
 		});
 	}
