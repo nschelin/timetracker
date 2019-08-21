@@ -1,42 +1,40 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html class="has-background-grey-dark has-text-white">
+	<head>
+		<meta charset="utf-8" />
+		<title>Time Tracker</title>
+		<base href="/" />
 
-<head>
-  <meta charset="utf-8">
-  <title>Time Tracker</title>
-  <base href="/">
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+		<!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+	</head>
 
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
-</head>
+	<body>
+		<app-root></app-root>
 
-<body class="has-background-grey-dark has-text-white-ter">
-  <app-root></app-root>
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				const navBar = document.querySelector('.navbar-burger');
+				navBar.addEventListener('click', () => {
+					const target = navBar.dataset.target;
+					const $target = document.getElementById(target);
+					navBar.classList.toggle('is-active');
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const navBar = document.querySelector('.navbar-burger');
-      navBar.addEventListener('click', () => {
-        const target = navBar.dataset.target;
-        const $target = document.getElementById(target);
-        navBar.classList.toggle('is-active');
+					$target.classList.toggle('is-active');
 
-        $target.classList.toggle('is-active');
-
-        const navItems = Array.from($target.querySelectorAll('.navbar-item'));
-        navItems.forEach(ni => {
-            ni.addEventListener('click', () => {
-            navBar.classList.remove('is-active');
-            $target.classList.remove('is-active');
-        })});
-      })
-    })
-  </script>
-</body>
-
+					const navItems = Array.from($target.querySelectorAll('.navbar-item'));
+					navItems.forEach(ni => {
+						ni.addEventListener('click', () => {
+							navBar.classList.remove('is-active');
+							$target.classList.remove('is-active');
+						});
+					});
+				});
+			});
+		</script>
+	</body>
 </html>
-
 
 <!-- <!DOCTYPE html>
 <html>
