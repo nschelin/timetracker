@@ -20,9 +20,9 @@
 	</app-modal> -->
 
 	<div class="column is-fullwidth">
-		<table class="table is-mobile has-background-dark has-text-white">
+		<table class="table is-mobile has-text-white">
 			<thead>
-				<tr>
+				<tr class="has-background-dark">
 					<th class="has-text-white">Project</th>
 					<th class="has-text-white">Client</th>
 					<th class="has-text-white">Created</th>
@@ -31,18 +31,20 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let project of projects">
-					<td>
+				<tr *ngFor="let project of projects" class="has-background-dark">
+					<td data-label="Project">
 						<button type="button" class="button is-dark has-text-weight-bold" title="Edit Project">
 							{{ project.name }}
 						</button>
 					</td>
-					<td>
+					<td data-label="Client">
 						{{ project?.client?.name || 'No Client' }}
 					</td>
-					<td>{{ project.created | date: 'short' }}</td>
-					<td>{{ project.modified | date: 'short' }}</td>
-					<td>
+					<td data-label="Created">
+						{{ project.created | date: 'short' }}
+					</td>
+					<td data-label="Modified">{{ project.modified | date: 'short' }}</td>
+					<td data-label="Actions">
 						<button type="button" class="button is-danger" title="Delete Project">
 							<i class="far fa-trash-alt"></i>
 						</button>

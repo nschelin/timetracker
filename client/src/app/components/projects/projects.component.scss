@@ -3,7 +3,8 @@
 }
 
 .table {
-	@media (min-width: 770px) {
+	background-color: transparent;
+	@media (min-width: 769px) {
 		tr {
 			th:first-child,
 			td:first-child {
@@ -20,7 +21,7 @@
 		}
 	}
 
-	@media (max-width: 769px) {
+	@media screen and (max-width: 768px) {
 		&,
 		thead,
 		tbody,
@@ -31,52 +32,36 @@
 		}
 
 		thead tr {
-			position: absolute;
-			top: -9999px;
-			left: -9999px;
+			display: none;
 		}
 
 		tr {
-			margin-bottom: 5px;
+			margin-bottom: 10px;
+			border: 1px solid white;
 		}
 
 		td {
-			border: none;
+			display: flex;
+			justify-content: space-between;
 			border-bottom: 1px solid #eee;
-			position: relative;
 			padding-left: 10px;
-			margin-left: 150px;
 		}
 
 		td:before {
-			position: absolute;
-			top: 12px;
-			left: 6px;
-			width: 200px;
-			padding-right: 40px;
-			white-space: nowrap;
-			margin-left: -150px;
 			font-weight: 700;
+			content: attr(data-label);
 		}
 
-		td:nth-of-type(1) {
-			padding-left: 0;
+		td:first-child:before {
+			padding-top: 5px;
 		}
 
-		td:nth-of-type(1):before {
-			content: 'Project';
+		td:not(:first-child) {
+			padding-right: 24px;
 		}
-		td:nth-of-type(2):before {
-			content: 'Client';
-		}
-		td:nth-of-type(3):before {
-			content: 'Created';
-		}
-		td:nth-of-type(4):before {
-			content: 'Modified';
-		}
-		td:nth-of-type(5):before {
-			content: 'Action';
+
+		td:last-child {
+			border: none;
 		}
 	}
 }
