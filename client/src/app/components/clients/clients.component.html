@@ -33,7 +33,7 @@
 			</thead>
 			<tbody>
 				<tr *ngFor="let client of clients">
-					<td>
+					<td data-label="Client">
 						<button
 							type="button"
 							class="button is-dark has-text-weight-bold"
@@ -43,9 +43,9 @@
 							{{ client.name }}
 						</button>
 					</td>
-					<td>{{ client.created | date: 'short' }}</td>
-					<td>{{ client.modified | date: 'short' }}</td>
-					<td>
+					<td data-label="Created">{{ client.created | date: 'short' }}</td>
+					<td data-label="Modified">{{ client.modified | date: 'short' }}</td>
+					<td data-label="Actions">
 						<button
 							type="button"
 							class="button is-danger"

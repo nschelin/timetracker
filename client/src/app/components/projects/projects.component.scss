@@ -4,7 +4,7 @@
 
 .table {
 	background-color: transparent;
-	@media (min-width: 769px) {
+	@media screen and (min-width: 769px) {
 		tr {
 			th:first-child,
 			td:first-child {
@@ -18,51 +18,6 @@
 				min-width: 75px;
 				width: 75px;
 			}
-		}
-	}
-
-	@media screen and (max-width: 768px) {
-		&,
-		thead,
-		tbody,
-		th,
-		td,
-		tr {
-			display: block;
-		}
-
-		thead tr {
-			display: none;
-		}
-
-		tr {
-			margin-bottom: 10px;
-			border: 1px solid white;
-			box-shadow: 3px 3px 8px #888;
-		}
-
-		td {
-			display: flex;
-			justify-content: space-between;
-			border-bottom: 1px solid #eee;
-			padding-left: 10px;
-		}
-
-		td:before {
-			font-weight: 700;
-			content: attr(data-label);
-		}
-
-		td:first-child:before {
-			padding-top: 5px;
-		}
-
-		td:not(:first-child) {
-			padding-right: 24px;
-		}
-
-		td:last-child {
-			border: none;
 		}
 	}
 }

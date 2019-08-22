@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-html, body {
-    height: 100%;
+html,
+body {
+	height: 100%;
 }
 
 // router-outlet ~ * {
@@ -9,27 +10,79 @@ html, body {
 //     width: 100%;
 // }
 
-
-
 .date-info {
-    font-size: 0.60rem;
-    font-style: italic;
+	font-size: 0.6rem;
+	font-style: italic;
 }
 
 .button {
-    &.is-danger {
-        background-color: #f00 !important;
-    }
+	&.is-danger {
+		background-color: #f00 !important;
+	}
 
-    &.is-success {
-        background-color: #079c3b!important;
-    }
+	&.is-success {
+		background-color: #079c3b !important;
+	}
 }
 
 .align-right {
-    text-align: right;
+	text-align: right;
 }
 
 .header-row {
-    font-weight: 700;
+	font-weight: 700;
+}
+
+.table {
+	@media screen and (min-width: 769px) {
+		& {
+			box-shadow: 3px 3px 8px #888;
+			min-height: 400px;
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		&,
+		thead,
+		tbody,
+		th,
+		td,
+		tr {
+			display: block;
+		}
+
+		thead tr {
+			display: none;
+		}
+
+		tr {
+			margin-bottom: 10px;
+			border: 1px solid white;
+			box-shadow: 3px 3px 8px #888;
+		}
+
+		td {
+			display: flex;
+			justify-content: space-between;
+			border-bottom: 1px solid #eee;
+			padding-left: 10px;
+		}
+
+		td:before {
+			font-weight: 700;
+			content: attr(data-label);
+		}
+
+		td:first-child:before {
+			padding-top: 5px;
+		}
+
+		td:not(:first-child) {
+			padding-right: 24px;
+		}
+
+		td:last-child {
+			border: none;
+		}
+	}
 }
