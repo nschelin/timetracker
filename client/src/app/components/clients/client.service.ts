@@ -19,6 +19,10 @@ export class ClientService {
 		}
 	}
 
+	public getAllClients(): Observable<Client[]> {
+		return this.http.get<Client[]>('/api/clients/all');
+	}
+
 	public saveClient(client: Client) {
 		if (client._id) {
 			return this.http.put(`/api/client/${client._id}`, client);

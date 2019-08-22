@@ -52,7 +52,7 @@ export class ProjectFormComponent implements OnInit, OnChanges {
 		);
 	}
 
-	onCancel() {
+	cancel() {
 		this.close.emit(null);
 		this.projectVal = null;
 		this.reset();
@@ -76,8 +76,8 @@ export class ProjectFormComponent implements OnInit, OnChanges {
 			projectCode: ['', Validators.required]
 		});
 
-		this.clientService.getClients().subscribe(result => {
-			this.clients = result.items.sort((a, b) => (a.name > b.name ? 1 : -1));
+		this.clientService.getAllClients().subscribe(result => {
+			this.clients = result;
 		});
 	}
 

@@ -1,4 +1,6 @@
-const clients = require('../baseDb').clients;
+const db = require('../baseDb');
+const clients = db.clients;
+const projects = db.projects;
 
 class ClientRepo {
 	constructor() {}
@@ -12,16 +14,44 @@ class ClientRepo {
 				.sort({ name: 1 })
 				.skip((page - 1) * pageSize)
 				.limit(pageSize)
-				.exec((err, clients) => {
+				.exec((err, clientDocs) => {
 					if (err) reject(err);
 
-					const collection = {
-						items: clients,
-						page,
-						total
-					};
-					resolve(collection);
+					const clientIds = clientDocs.map(({ _id }) => ({
+						clientId: _id
+					}));
+
+					projects.find({ $or: clientIds }, (err, projectDocs) => {
+						if (err) reject(err);
+
+						projectDocs.forEach((p, index, arr) => {
+							const clientIndex = clientDocs.findIndex(
+								c => c._id === p.clientId
+							);
+
+							clientDocs[clientIndex].canDelete =
+								clientIndex > -1 ? false : true;
+						});
+
+						const collection = {
+							items: clientDocs,
+							page,
+							total
+						};
+						resolve(collection);
+					});
 				});
+		});
+	}
+
+	async allClients() {
+		return new Promise((resolve, reject) => {
+			clients.find({}, (err, allClients) => {
+				if (err) reject(err);
+
+				allClients.sort((a, b) => a.name > b.name);
+				resolve(allClients);
+			});
 		});
 	}
 

@@ -85,7 +85,8 @@ export class ClientsFormComponent implements OnInit, OnChanges {
 			this.clientVal = {
 				name: '',
 				created: null,
-				modified: null
+				modified: null,
+				canDelete: true
 			};
 		}
 	}

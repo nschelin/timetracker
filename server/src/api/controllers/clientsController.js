@@ -8,6 +8,11 @@ exports.list = async (req, res) => {
 	res.send(clients);
 };
 
+exports.all = async (req, res) => {
+	const clients = await db.allClients();
+	res.send(clients);
+};
+
 exports.add = async (req, res) => {
 	const client = req.body;
 	const foundClient = await db.findByName(client.name);

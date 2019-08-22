@@ -11,10 +11,7 @@
 				required
 			/>
 		</div>
-		<div
-			*ngIf="f.name.invalid && (f.name.touched || f.name.dirty)"
-			class="has-text-danger"
-		>
+		<div *ngIf="f.name.invalid && (f.name.touched || f.name.dirty)" class="has-text-danger">
 			Project Name is Required
 		</div>
 	</div>
@@ -32,9 +29,7 @@
 			/>
 		</div>
 		<div
-			*ngIf="
-				f.projectCode.invalid && (f.projectCode.touched || f.projectCode.dirty)
-			"
+			*ngIf="f.projectCode.invalid && (f.projectCode.touched || f.projectCode.dirty)"
 			class="has-text-danger"
 		>
 			Project Code is Required
@@ -44,12 +39,7 @@
 		<div class="control">
 			<label for="client" class="label">Client</label>
 			<div class="select is-info">
-				<select
-					name="client"
-					id="client"
-					formControlName="clientId"
-					class="select"
-				>
+				<select name="client" id="client" formControlName="clientId" class="select">
 					<option [ngValue]="null">Select...</option>
 					<option *ngFor="let client of clients" [value]="client._id">
 						{{ client.name }}
@@ -65,23 +55,16 @@
 		</div>
 	</div>
 
-	<div
-		class="field has-text-black is-size-7"
-		*ngIf="projectVal.created && projectVal.modified"
-	>
-		Created: {{ projectVal.created | date: 'short' }} <br />
+	<div class="field has-text-black is-size-7" *ngIf="projectVal?.created && projectVal?.modified">
+		Created: {{ projectVal?.created | date: 'short' }} <br />
 		Modified:
-		{{ projectVal.modified | date: 'short' }}
+		{{ projectVal?.modified | date: 'short' }}
 	</div>
 	<div class="buttons is-pulled-right">
-		<button
-			type="submit"
-			class="button is-link"
-			[disabled]="!projectForm.valid"
-		>
+		<button type="submit" class="button is-link" [disabled]="!projectForm.valid">
 			Save
 		</button>
-		<button type="button" class="button is-danger" (click)="onCancel()">
+		<button type="button" class="button is-danger" (click)="cancel()">
 			Cancel
 		</button>
 	</div>

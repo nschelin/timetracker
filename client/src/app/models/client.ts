@@ -3,4 +3,5 @@ export default interface Client {
 	name: string;
 	created: Date;
 	modified: Date;
+	canDelete: boolean;
 }

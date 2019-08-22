@@ -13,7 +13,7 @@
 	</div>
 
 	<app-modal [title]="'Add/Edit Project'" [show]="show">
-		<app-project-form [project]="project" (close)="closeModal($event)"></app-project-form>
+		<app-project-form [project]="currentProject" (close)="closeModal($event)"></app-project-form>
 	</app-modal>
 
 	<div class="column is-fullwidth">
@@ -30,7 +30,12 @@
 			<tbody>
 				<tr *ngFor="let project of projects" class="has-background-dark">
 					<td data-label="Project">
-						<button type="button" class="button is-dark has-text-weight-bold" title="Edit Project">
+						<button
+							type="button"
+							class="button is-dark has-text-weight-bold"
+							title="Edit Project"
+							(click)="editProject(project)"
+						>
 							{{ project.name }}
 						</button>
 					</td>

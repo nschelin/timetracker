@@ -50,6 +50,7 @@
 							type="button"
 							class="button is-danger"
 							title="Delete Client"
+							[disabled]="client?.canDelete === undefined ? client.canDelete : true"
 							(click)="deleteClient(client)"
 						>
 							<i class="far fa-trash-alt"></i>
