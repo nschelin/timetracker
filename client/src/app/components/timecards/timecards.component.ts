@@ -10,15 +10,14 @@ import { TimeCardWeek } from 'src/app/models/timecardWeek';
 })
 export class TimecardsComponent implements OnInit {
 	public timecards: TimeCard[];
-	public timecardWeeks: TimeCardWeek[];
-	public editIndex: Number = -1;
-	public showAvailableWeeks: boolean = false;
+	public currentTimeCard: TimeCard;
+	public show = false;
 
 	constructor() {}
 
-	generateWeeks() {}
-
-	ngOnInit() {
-		this.generateWeeks();
+	addTimeCard() {
+		this.show = true;
 	}
+
+	ngOnInit() {}
 }
