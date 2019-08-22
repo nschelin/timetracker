@@ -1,9 +1,8 @@
-import Project from './project';
+import { TimeCardWeek } from './timecardWeek';
 
-export default interface TimeCard {
-    _id?: string,
-    week: number,
-    projects: Project[],
-    created: Date,
-    modified: Date
+export interface TimeCard {
+	_id?: string;
+	week: TimeCardWeek;
+	created: Date;
+	modified: Date;
 }

@@ -2,7 +2,7 @@ import { Collection } from '../../models/collection';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import Client from '../../models/client';
+import { Client } from '../../models/client';
 import { Observable } from 'rxjs';
 
 @Injectable({

@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import Client from 'src/app/models/client';
+import { Client } from 'src/app/models/client';
 import { ClientService } from '../clients/client.service';
 
 @Component({

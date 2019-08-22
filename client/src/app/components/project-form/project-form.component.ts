@@ -11,8 +11,8 @@ import {
 } from '@angular/core';
 
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import Project from 'src/app/models/project';
-import Client from 'src/app/models/client';
+import { Project } from 'src/app/models/project';
+import { Client } from 'src/app/models/client';
 
 @Component({
 	selector: 'app-project-form',

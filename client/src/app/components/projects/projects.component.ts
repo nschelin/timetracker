@@ -5,8 +5,8 @@ import { ClientService } from './../clients/client.service';
 import { ProjectsService } from './projects.service';
 
 import { Collection } from '../../models/collection';
-import Project from '../../models/project';
-import Client from '../../models/client';
+import { Project } from '../../models/project';
+import { Client } from '../../models/client';
 
 // import { v4 as uuid } from 'uuid';
 

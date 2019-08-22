@@ -1,5 +1,6 @@
-export default interface TimeCardWeek {
-    text: string,
-    week: number,
-    dateRange: []
+import { ProjectInfo } from './projectInfo';
+
+export interface TimeCardWeek {
+	weekNumber: number;
+	projects: [ProjectInfo];
 }

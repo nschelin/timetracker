@@ -1,6 +1,6 @@
-import Client from './client';
+import { Client } from './client';
 
-export default interface Project {
+export interface Project {
 	_id?: string;
 	name: string;
 	projectCode: string;
