@@ -73,7 +73,7 @@ class ProjectRepo {
 	}
 
 	async delete(id) {
-		return await db.projects.removeAsync({ _id: id }, {});
+		return await projects.removeAsync({ _id: id }, {});
 	}
 }
 
