@@ -15,6 +15,29 @@
 	</div>
 
 	<app-modal [title]="'Add/Edit Time Card'" [show]="show">
+		<div class="field is-grouped">
+			<div class="control">
+				<label for="week" class="label">Select Week</label>
+				<div class="select is-info">
+					<select
+						name="week"
+						id="week"
+						class="select"
+						(change)="setCurrentWeek($event.target.value)"
+					>
+						<option [value]="-1">Select...</option>
+						<option *ngFor="let weekNum of recentWeekNumbers" [value]="weekNum">
+							{{ weekNum }}
+						</option>
+					</select>
+				</div>
+			</div>
+			<div class="control is-flex">
+				<button class="button" style="align-self:flex-end" (click)="setCurrentWeek()">
+					Current Week
+				</button>
+			</div>
+		</div>
 		<!-- <app-project-form [project]="currentProject" (close)="closeModal($event)"></app-project-form> -->
 	</app-modal>
 </div>
