@@ -16,11 +16,10 @@ import Client from '../../models/client';
 	styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit {
-	public originalProject: Project;
+	public pageSize = 5;
 	public clients: Client[];
 	public projects: Project[];
 	public currentProject: Project;
-	public editIndex: -1;
 	public show = false;
 	public currentPage: number;
 	public prevBtnDisable = true;
@@ -49,7 +48,7 @@ export class ProjectsComponent implements OnInit {
 		this.show = !this.show;
 	}
 
-	onClose(project: Project) {
+	closeModal(project: Project) {
 		if (project != null) {
 			if (project._id) {
 				const index = this.projects.findIndex(cl => cl._id === project._id);
@@ -71,9 +70,17 @@ export class ProjectsComponent implements OnInit {
 	deleteProject(project: Project) {
 		if (confirm('Delete this Project?')) {
 			this.projectService.deleteProject(project).subscribe(() => {
-				this.projectService.getProjects(this.currentPage);
+				this.getProjects(this.currentPage);
 			});
 		}
+	}
+
+	getProjects(page?: number) {
+		this.projectService.getProjects(page).subscribe((projectCollection: Collection) => {
+			this.projects = projectCollection.items.sort((a, b) => (a.name > b.name ? 1 : -1));
+			this.currentPage = projectCollection.page;
+			this.total = projectCollection.total;
+		});
 	}
 
 	previous(page) {
@@ -86,27 +93,7 @@ export class ProjectsComponent implements OnInit {
 		this.getProjects(page);
 	}
 
-	getProjects(page?: number) {
-		this.projectService.getProjects(page).subscribe((projectCollection: Collection) => {
-			this.projects = projectCollection.items.sort((a, b) => (a.name > b.name ? 1 : -1));
-			this.currentPage = projectCollection.page;
-			this.total = projectCollection.total;
-		});
-	}
-
 	ngOnInit() {
 		this.getProjects();
-		// forkJoin([
-		// 	this.clientService.getClients(),
-		// 	this.projectService.getProjects()
-		// ]).subscribe(([clientCollection, projects]) => {
-		// 	this.clients = (clientCollection.clients as any[]).sort((a, b) =>
-		// 		a.name > b.name ? 1 : -1
-		// 	);
-
-		// 	this.projects = (projects as any[]).sort((a, b) =>
-		// 		a.name > b.name ? 1 : -1
-		// 	);
-		// });
 	}
 }

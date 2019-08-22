@@ -12,12 +12,9 @@
 		</div>
 	</div>
 
-	<!-- <app-modal [title]="'Add/Edit Project'" [show]="show">
-		<app-project-form
-			[project]="project"
-			(close)="onClose($event)"
-		></app-project-form>
-	</app-modal> -->
+	<app-modal [title]="'Add/Edit Project'" [show]="show">
+		<app-project-form [project]="project" (close)="closeModal($event)"></app-project-form>
+	</app-modal>
 
 	<div class="column is-fullwidth">
 		<table class="table is-mobile has-text-white">
@@ -45,12 +42,28 @@
 					</td>
 					<td data-label="Modified">{{ project.modified | date: 'short' }}</td>
 					<td data-label="Actions">
-						<button type="button" class="button is-danger" title="Delete Project">
+						<button
+							type="button"
+							class="button is-danger"
+							title="Delete Project"
+							(click)="deleteProject(project)"
+						>
 							<i class="far fa-trash-alt"></i>
 						</button>
 					</td>
 				</tr>
 			</tbody>
 		</table>
+	</div>
+
+	<div class="column">
+		<app-pager
+			[items]="projects"
+			[currentPage]="currentPage"
+			[total]="total"
+			[pageSize]="pageSize"
+			(prev)="previous($event)"
+			(next)="next($event)"
+		></app-pager>
 	</div>
 </div>

@@ -10,7 +10,6 @@ import { Collection } from 'src/app/models/collection';
 })
 export class ClientsComponent implements OnInit {
 	public pageSize = 5;
-	public originalClient: Client;
 	public clients: Client[];
 	public currentClient: Client;
 	public currentPage: number;

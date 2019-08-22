@@ -12,6 +12,7 @@ exports.add = async (req, res) => {
 	const project = req.body;
 	const foundProject = await db.findByName(project.name);
 	if (!foundProject) {
+		project.created = project.modified = new Date();
 		const newProject = await db.insert(project);
 		res.send(newProject);
 	} else {
