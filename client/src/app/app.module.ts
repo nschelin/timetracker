@@ -18,6 +18,7 @@ import { ClientsFormComponent } from './components/clients-form/clients-form.com
 import { ModalComponent } from './components/modal/modal.component';
 import { PagerComponent } from './components/pager/pager.component';
 import { ProjectFormComponent } from './components/project-form/project-form.component';
+import { TimecardFormComponent } from './components/timecard-form/timecard-form.component';
 
 @NgModule({
 	declarations: [
@@ -31,7 +32,8 @@ import { ProjectFormComponent } from './components/project-form/project-form.com
 		ClientsFormComponent,
 		ModalComponent,
 		PagerComponent,
-		ProjectFormComponent
+		ProjectFormComponent,
+		TimecardFormComponent
 	],
 	imports: [
 		BrowserModule,

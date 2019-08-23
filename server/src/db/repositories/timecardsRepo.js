@@ -11,7 +11,7 @@ class TimeCardRepo {
 		const total = await this.total();
 
 		return await new Promise((resolve, reject) => {
-			projects
+			timecards
 				.find({})
 				.sort({ name: 1 })
 				.skip((page - 1) * pageSize)
@@ -44,8 +44,10 @@ class TimeCardRepo {
 		return await timecards.findOneAsync({ _id: id });
 	}
 
-	async findByName(name) {
-		return await timecards.findOneAsync({ name });
+	async findByYearWeek(year, week) {
+		return await timecards.findOneAsync({
+			$and: [{ 'week.year': +year }, { 'week.weekNumber': +week }]
+		});
 	}
 
 	async insert(project) {

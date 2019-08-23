@@ -11,6 +11,8 @@ const DataStore = require('nedb');
 DataStore.prototype.findOneAsync = Promise.promisify(
 	DataStore.prototype.findOne
 );
+DataStore.prototype.findAsync = Promise.promisify(DataStore.prototype.find);
+
 DataStore.prototype.insertAsync = Promise.promisify(DataStore.prototype.insert);
 DataStore.prototype.updateAsync = Promise.promisify(
 	DataStore.prototype.update,

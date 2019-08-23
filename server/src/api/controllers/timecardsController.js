@@ -8,6 +8,19 @@ exports.list = async (req, res) => {
 	res.send(timecards);
 };
 
+exports.get = async (req, res) => {
+	const id = req.params.id;
+	const timecard = (await db.findById(id)) || {};
+	res.send(timecard);
+};
+
+exports.getYearWeek = async (req, res) => {
+	const week = req.params.week;
+	const year = req.params.year;
+	const timecard = (await db.findByYearWeek(year, week)) || {};
+	res.send(timecard);
+};
+
 exports.add = async (req, res) => {
 	const timeCard = req.body;
 	const foundTimeCard = await db.findByName(timeCard.name);

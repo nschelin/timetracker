@@ -21,6 +21,8 @@ router.put('/project/:id', projectsController.update);
 router.delete('/project/:id', projectsController.delete);
 
 router.get('/timecards', timeCardController.list);
+router.get('/timecard/:year/:week', timeCardController.getYearWeek);
+router.get('/timecard/:id', timeCardController.get);
 router.post('/timecard', timeCardController.add);
 router.put('/timecard/:id', timeCardController.update);
 router.delete('/timecard/:id', timeCardController.delete);

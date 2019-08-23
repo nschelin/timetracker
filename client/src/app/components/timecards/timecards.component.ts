@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { getWeek } from 'date-fns';
 
@@ -12,10 +13,9 @@ import { TimeCardWeek } from 'src/app/models/timecardWeek';
 export class TimecardsComponent implements OnInit {
 	public timecards: TimeCard[];
 	public recentWeekNumbers: number[] = [];
-	public currentWeek: number;
 	public show = false;
 
-	constructor() {}
+	constructor(private router: Router) {}
 
 	generateWeeks() {
 		const currentWeek = getWeek(Date.now());
@@ -25,9 +25,10 @@ export class TimecardsComponent implements OnInit {
 	}
 
 	setCurrentWeek(weekNum: number = -1) {
-		this.currentWeek = +weekNum === -1 ? getWeek(Date.now()) : weekNum;
-		// create week
+		const d = new Date();
+		const currentWeek = +weekNum === -1 ? getWeek(d) : weekNum;
 		this.show = false;
+		this.router.navigate([`/timecards/${d.getFullYear()}/${currentWeek}`]);
 	}
 
 	addTimeCard() {
