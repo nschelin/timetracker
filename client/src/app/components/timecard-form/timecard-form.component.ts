@@ -1,6 +1,6 @@
 import { TimeCard } from './../../models/timecard';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TimeCardsService } from './../timecards/timecards.service';
 @Component({
 	selector: 'app-timecard-form',
@@ -10,19 +10,21 @@ import { TimeCardsService } from './../timecards/timecards.service';
 export class TimecardFormComponent implements OnInit {
 	public currentWeek: number;
 	public currentYear: number;
-	constructor(
-		private router: Router,
-		private route: ActivatedRoute,
-		private timecardService: TimeCardsService
-	) {}
+	public timeCard: TimeCard;
+	constructor(private route: ActivatedRoute, private timecardService: TimeCardsService) {}
 
 	ngOnInit() {
-		this.currentWeek = this.route.snapshot.params.get('week');
-		this.currentYear = this.route.snapshot.params.get('year');
+		this.currentWeek = +this.route.snapshot.params.week;
+		this.currentYear = +this.route.snapshot.params.year;
 		this.timecardService
-			.getTimeCard(this.currentWeek, this.currentYear)
+			.getTimeCardByWeekYear(this.currentWeek, this.currentYear)
 			.subscribe((timeCard: TimeCard) => {
-				console.log(timeCard);
+				if (timeCard === null) {
+					// TODO: create timecard
+				} else {
+					// TODO: display existing timecard data
+					this.timeCard = timeCard;
+				}
 			});
 	}
 }
