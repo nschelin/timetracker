@@ -21,4 +21,8 @@ export class TimeCardsService {
 	public getTimeCards(): Observable<Collection> {
 		return this.http.get<Collection>('/api/timecards');
 	}
+
+	public createTimecardWeek(weekNumber: number, year: number): Observable<TimeCard> {
+		return this.http.post<TimeCard>('/api/timecards', { weekNumber, year });
+	}
 }

@@ -10,14 +10,14 @@ exports.list = async (req, res) => {
 
 exports.get = async (req, res) => {
 	const id = req.params.id;
-	const timecard = (await db.findById(id)) || {};
+	const timecard = (await db.findById(id)) || null;
 	res.send(timecard);
 };
 
 exports.getYearWeek = async (req, res) => {
 	const week = req.params.week;
 	const year = req.params.year;
-	const timecard = (await db.findByYearWeek(year, week)) || {};
+	const timecard = (await db.findByYearWeek(year, week)) || null;
 	res.send(timecard);
 };
 

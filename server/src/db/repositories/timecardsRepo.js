@@ -50,6 +50,9 @@ class TimeCardRepo {
 		});
 	}
 
+	async createTimeCard(week, year) {
+		return await timecards.createTimeCardAsync(week, year);
+	}
 	async insert(project) {
 		return await timecards.insertAsync(project);
 	}
